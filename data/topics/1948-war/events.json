@@ -454,6 +454,95 @@
     "status": "draft"
   },
   {
+    "id": "semiramis-hotel-bombing-1948",
+    "title": "Semiramis Hotel bombing in Katamon, Jerusalem",
+    "type": "attack",
+    "start": "1948-01-05",
+    "end": "1948-01-06",
+    "importance": 3,
+    "place": {
+      "name": "Semiramis Hotel, Katamon, Jerusalem",
+      "lat": 31.7625,
+      "lon": 35.2081,
+      "precision": "approximate",
+      "note": "Hotel in the Katamon neighbourhood of Jerusalem. Coordinates are those Wikipedia gives for the bombing; the exact building position was not checked."
+    },
+    "summary": "On the night of 5–6 January 1948, a Haganah team blew up the Christian-owned Semiramis Hotel in Jerusalem's Katamon neighbourhood, which the Haganah suspected was an Arab headquarters. The explosion killed 24 or 26 civilians, among them seven members of the Aboussouan family, the owner's 23-year-old son and the acting Spanish consul, Manuel Allende Salazar. The British authorities condemned the attack, and David Ben-Gurion replaced the Haganah officer in charge of Jerusalem, Mishael Shaham, with David Shaltiel.",
+    "parties": [
+      "Haganah",
+      "civilians at the Semiramis Hotel"
+    ],
+    "disputes": [
+      {
+        "about": "whether the hotel was an Arab military base",
+        "accounts": [
+          {
+            "claim": "Yes: a Haganah spokesman told the Associated Press it was 'an important meeting place of Arab gangs, where arms were distributed to villages in the Jerusalem area', and the Jewish Agency stood by its statement that the hotel was a centre for Arab gangs and military groups; Wikipedia adds that the white jeep of Arab commander Abd al-Qadir al-Husayni had been seen in the hotel driveway before the bombing.",
+            "sources": [
+              "s1",
+              "s2"
+            ]
+          },
+          {
+            "claim": "No: the Palestine (Mandate) Government said reports that the hotel was a base for Arab gangs and the headquarters of the Najjada and Futuwwa youth groups were 'entirely without foundation'; the Haganah later said it had acted on inaccurate information.",
+            "sources": [
+              "s2",
+              "s1"
+            ]
+          },
+          {
+            "claim": "According to Larry Collins and Dominique Lapierre's book O Jerusalem!, the aim was 'a major blow in Arab Katamon' that 'might force the Arabs out of the quarter and change the psychological climate in the city'.",
+            "sources": [
+              "s1"
+            ]
+          }
+        ]
+      },
+      {
+        "about": "number killed",
+        "accounts": [
+          {
+            "claim": "24 or 26 civilians, including at least one child.",
+            "sources": [
+              "s1"
+            ]
+          },
+          {
+            "claim": "12 bodies recovered by 7 January, with one woman found alive in the debris (early count while rescue work went on).",
+            "sources": [
+              "s2"
+            ]
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "s1",
+        "title": "Semiramis Hotel bombing",
+        "author": "",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Semiramis_Hotel_bombing",
+        "kind": "reference",
+        "accessed": "2026-11-15",
+        "supports": "Haganah bombing of the Christian-owned hotel in Katamon on the night of 5–6 January 1948 by a team of four with ten riflemen; 24 or 26 civilians killed, including seven Aboussouans, Hubert Lorenzo (the proprietor's son) and Spanish vice-consul Manuel Allende Salazar; Haganah spokesman's statement to AP; British condemnation as 'wholesale murder of innocent people'; Ben-Gurion sacked Mishael Shaham and replaced him with David Shaltiel; Haganah said its information was inaccurate; Abd al-Qadir al-Husayni's jeep seen at the hotel; O Jerusalem! account of the aim",
+        "via": "Associated Press report (1948); John B. Quigley; Larry Collins and Dominique Lapierre, O Jerusalem!"
+      },
+      {
+        "id": "s2",
+        "title": "Palestine Govt. Studying Action Against Haganah for Blasting of Arab Headquarters (7 January 1948)",
+        "author": "",
+        "publisher": "Jewish Telegraphic Agency (Jewish news agency)",
+        "url": "https://www.jta.org/archive/palestine-govt-studying-action-against-haganah-for-blasting-of-arab-headquarters",
+        "kind": "journalism",
+        "accessed": "2026-11-15",
+        "supports": "Haganah publicly took responsibility for blasting the Semiramis Hotel; government communique calling claims that it was a base for Arab gangs and Najjada/Futuwwa headquarters 'entirely without foundation'; Jewish Agency stood by its statement; Hussein Khalidi of the Arab Higher Executive blamed the government for giving 'no protection whatever' to Katamon's Arab residents; acting Spanish consul Manuel Salazar killed; 12 dead recovered so far",
+        "via": ""
+      }
+    ],
+    "status": "draft"
+  },
+  {
     "id": "ben-yehuda-street-bombing-1948",
     "title": "Ben Yehuda Street bombing in Jerusalem",
     "type": "attack",
@@ -1533,6 +1622,145 @@
         "accessed": "2026-11-15",
         "supports": "under the partition plan Jaffa was to form an Arab enclave in Jewish territory linked to the Arab state; quotes Begin on the Irgun's plan and 'the conquest of Jaffa'",
         "via": "Menachem Begin, The Revolt"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "ein-al-zeitun-1948",
+    "title": "Capture of Ein al-Zeitun and killing of prisoners",
+    "altNames": [
+      {
+        "name": "Ein al-Zeitun massacre",
+        "usage": "name of the Wikipedia article"
+      },
+      {
+        "name": "'Ayn al-Zaytun",
+        "usage": "spelling used by Zochrot and Walid Khalidi's All That Remains"
+      }
+    ],
+    "type": "massacre",
+    "start": "1948-05-01",
+    "end": "1948-05-03",
+    "importance": 3,
+    "place": {
+      "name": "Ein al-Zeitun ('Ayn al-Zaytun)",
+      "lat": 32.98083333,
+      "lon": 35.49166667,
+      "precision": "exact",
+      "note": "Palestinian village 1.5 km north of Safed, depopulated in 1948; its houses were blown up or burned and ruins remain on the site."
+    },
+    "summary": "Ein al-Zeitun, a Palestinian village of some 800–950 people just north of Safed, was attacked by the Palmach's Third Battalion in the early hours of 1 May 1948 with mortar fire and a ground assault, as a prelude to the battle for Safed. Most villagers fled or were expelled, while dozens of men were held prisoner. According to Israeli historian Benny Morris and soldiers' testimony, dozens of prisoners were then killed in a gully between the village and Safed on the orders of battalion commander Moshe Kelman. Palmach sappers blew up or burned the village on 2–3 May, a sight that frightened and demoralised Safed's Arab residents.",
+    "parties": [
+      "Palmach (Haganah), Third Battalion",
+      "Villagers and armed men of Ein al-Zeitun"
+    ],
+    "disputes": [
+      {
+        "about": "number killed",
+        "accounts": [
+          {
+            "claim": "More than 70 villagers killed.",
+            "sources": [
+              "s1",
+              "s2"
+            ]
+          },
+          {
+            "claim": "Between 30 and 70 unarmed prisoners killed after the capture.",
+            "sources": [
+              "s2"
+            ]
+          },
+          {
+            "claim": "Thirty-seven men taken captive were, according to Benny Morris, probably among a group of about seventy people killed in the gully.",
+            "sources": [
+              "s3"
+            ]
+          },
+          {
+            "claim": "Several dozen prisoners killed by two Palmach soldiers acting on Kelman's orders (Wikipedia, drawing on Morris and on Netiva Ben-Yehuda's account).",
+            "sources": [
+              "s1"
+            ]
+          },
+          {
+            "claim": "23 men taken from the village and shot on a hill by two men from Safed, according to the testimony of soldier Aharon Yo'eli obtained by historian Uri Milstein.",
+            "sources": [
+              "s1"
+            ]
+          }
+        ]
+      },
+      {
+        "about": "whether women and children were also killed",
+        "accounts": [
+          {
+            "claim": "Villagers interviewed in 1973 said the men were taken away and the rest of the villagers were expelled while shots were fired over their heads.",
+            "sources": [
+              "s3"
+            ]
+          },
+          {
+            "claim": "Hans Lebrecht, sent to the destroyed village to build a pump station, said he found many bodies of women, children and babies near the mosque; Syria at the time charged that women had been raped.",
+            "sources": [
+              "s1"
+            ]
+          }
+        ]
+      },
+      {
+        "about": "date the village was captured",
+        "accounts": [
+          {
+            "claim": "1 May 1948.",
+            "sources": [
+              "s1",
+              "s3"
+            ]
+          },
+          {
+            "claim": "2 May 1948.",
+            "sources": [
+              "s2"
+            ]
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "s1",
+        "title": "Ein al-Zeitun massacre",
+        "author": "",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Ein_al-Zeitun_massacre",
+        "kind": "reference",
+        "accessed": "2026-11-15",
+        "supports": "attack on 1 May by the Palmach's 3rd Battalion under Moshe Kelman as a preliminary to Safed; village of about 800; 70+ killed; most fled, the rest expelled apart from 30–100 men; destruction of the village; several dozen prisoners murdered in the gully on Kelman's orders; Ben-Yehuda and Yo'eli testimonies; Syrian rape charge; Lebrecht's account; terror spread to Safed's Arabs",
+        "via": "Benny Morris; Netiva Ben-Yehuda; Uri Milstein; Elad Peled and Hans Lebrecht (as quoted in the article)"
+      },
+      {
+        "id": "s2",
+        "title": "Ein al-Zeitun",
+        "author": "",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Ein_al-Zeitun",
+        "kind": "reference",
+        "accessed": "2026-11-15",
+        "supports": "location 1.5 km north of Safed; 820 inhabitants in 1945; capture on 2 May; most young and middle-aged men fled beforehand, the rest expelled; 30–70 unarmed prisoners killed afterwards; one man killed trying to return; Pappé's view that such killings near towns aimed to make townspeople flee",
+        "via": "Ilan Pappé; Walid Khalidi, All That Remains (1992)"
+      },
+      {
+        "id": "s3",
+        "title": "'Ayn al-Zaytun (village page)",
+        "author": "",
+        "publisher": "Zochrot (Israeli NGO that promotes acknowledgment of the Nakba)",
+        "url": "https://www.zochrot.org/villages/village_details/49380/en",
+        "kind": "organization",
+        "accessed": "2026-11-15",
+        "supports": "1948 population 950; occupied 1 May 1948 by the Palmach during Operation Yiftach; 3 a.m. barrage from eleven mortars and ground assault by two platoons (villagers' testimony); men taken away and others expelled; 37 captives probably among about 70 killed in the gully on Kelman's orders (Morris); houses burned or blown up on 2–3 May, partly to terrify Safed; demoralising effect on Safed",
+        "via": "Walid Khalidi (ed.), All That Remains (1992), citing Benny Morris and villagers interviewed in 1973"
       }
     ],
     "status": "draft"
@@ -3397,6 +3625,76 @@
     "status": "draft"
   },
   {
+    "id": "nitzanim-1948",
+    "title": "Battle of Nitzanim",
+    "type": "battle",
+    "start": "1948-06-07",
+    "importance": 3,
+    "place": {
+      "name": "Kibbutz Nitzanim",
+      "lat": 31.7175,
+      "lon": 34.63555556,
+      "precision": "approximate",
+      "note": "Kibbutz founded in 1943 on the coastal plain between the Arab localities of Isdud and Majdal. After the war it was rebuilt a few kilometres south of the original site, and a youth village (later Nitzan) was built on the battle site. Wikipedia gives the same coordinates for the battle and for the present kibbutz, so the pin may be a few kilometres off."
+    },
+    "summary": "Nitzanim, a kibbutz founded in 1943 among the Arab localities of Isdud and Majdal, lay inside the area the UN partition plan gave to the Arab state and was cut off. On 7 June 1948 the Egyptian Army attacked it with artillery, aircraft, tanks and infantry, and that afternoon 105 surviving defenders, 26 of them wounded, surrendered. Thirty-three defenders were killed, and the prisoners were taken to Egypt and returned in March 1949. It was the first major Egyptian victory of the war and one of the few Israeli surrenders.",
+    "parties": [
+      "Egyptian Army",
+      "Israel Defense Forces (Givati Brigade, 53rd Battalion)",
+      "members of Kibbutz Nitzanim"
+    ],
+    "disputes": [
+      {
+        "about": "number killed",
+        "accounts": [
+          {
+            "claim": "33 defenders killed in the battle (17 soldiers and 16 villagers, three of them women), including three or four killed after surrendering.",
+            "sources": [
+              "s1"
+            ]
+          },
+          {
+            "claim": "Egyptian media at the time reported that 300 Jews had been killed, according to the prisoners.",
+            "sources": [
+              "s1"
+            ]
+          }
+        ]
+      },
+      {
+        "about": "whether the surrender was justified",
+        "accounts": [
+          {
+            "claim": "A Givati Brigade leaflet written by Abba Kovner called surrender while 'the last bullet breathes in the clip' a disgrace.",
+            "sources": [
+              "s1"
+            ]
+          },
+          {
+            "claim": "An inquiry led by Chief of Staff Ya'akov Dori sided with the defenders, citing their isolation, lack of ammunition and heavy losses; Ben-Gurion also praised them.",
+            "sources": [
+              "s1"
+            ]
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "s1",
+        "title": "Battle of Nitzanim",
+        "author": "",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Battle_of_Nitzanim",
+        "kind": "reference",
+        "accessed": "2026-11-15",
+        "supports": "date 7 June 1948; first major Egyptian victory and one of the few Israeli surrenders; kibbutz founded 1943, inside the partition plan's Arab state and isolated; 141 defenders; Egyptian artillery, air, armour and infantry attack; 105 surrendered at 16:00, 26 wounded; 33 killed; three or four killed after surrender; prisoners taken to Cairo and returned 7 March 1949; Egyptian media claim of 300 killed; Kovner leaflet and Dori inquiry; kibbutz rebuilt further south",
+        "via": "Avraham Ayalon, Givati Brigade against the Egyptian Invader (1963); IDF History Branch, History of the War of Independence; Netanel Lorch, The Edge of the Sword (1968); Benny Morris, 1948 (2008); Kenneth Pollack, Arabs at War (2004); Yoav Gelber, Palestine 1948 (2006)"
+      }
+    ],
+    "status": "draft"
+  },
+  {
     "id": "first-truce-1948",
     "title": "First truce",
     "altNames": [
@@ -3969,6 +4267,59 @@
     "status": "draft"
   },
   {
+    "id": "operation-kedem-1948",
+    "title": "Operation Kedem: failed attack on Jerusalem's Old City",
+    "altNames": [
+      {
+        "name": "Operation Kedem",
+        "usage": "Israeli operation name"
+      }
+    ],
+    "type": "military-operation",
+    "start": "1948-07-16",
+    "end": "1948-07-17",
+    "importance": 2,
+    "place": {
+      "name": "Old City walls near the New Gate, Jerusalem",
+      "lat": 31.77810556,
+      "lon": 35.2256,
+      "precision": "approximate",
+      "note": "Coordinates are those Wikipedia gives for the operation, by the New Gate; the attacks were spread along the walls between the New Gate and the Jaffa Gate and on Mount Zion."
+    },
+    "summary": "In July 1948 Irgun and Lehi units, by then coordinated by the new Israel Defense Forces but still independent, planned with the IDF's Etzioni Brigade to break into Jerusalem's walled Old City and capture East Jerusalem. Set for the evening of 16 July, a day before the second truce, the attack was repeatedly delayed and began only at 02:30. The Irgun broke through at the New Gate, but the Lehi attack on the wall towards the Jaffa Gate and the Beit Horon Battalion's attack from Mount Zion failed, and at 05:45 commander David Shaltiel ordered a retreat. The Old City stayed in Jordanian hands until the 1967 war.",
+    "parties": [
+      "Irgun",
+      "Lehi",
+      "Israel Defense Forces (Etzioni Brigade, Beit Horon Battalion)",
+      "Arab forces holding the Old City"
+    ],
+    "sources": [
+      {
+        "id": "s1",
+        "title": "Operation Kedem",
+        "author": "",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Operation_Kedem",
+        "kind": "reference",
+        "accessed": "2026-11-15",
+        "supports": "Irgun and Lehi operation in July 1948 to capture East Jerusalem including the Old City; units coordinated by the IDF but still independent; Etzioni Brigade's Beit Horon Battalion; preliminary fight for Malha on 14 July; planned for 20:00 on 16 July, a day before the second truce, began at 02:30; Irgun broke through at the New Gate, Lehi (New Gate–Jaffa Gate wall) and Beit Horon (Mount Zion) failed; Shaltiel ordered retreat at 05:45",
+        "via": "Irgun (Etzel) website pages listed in the article; other references not checked"
+      },
+      {
+        "id": "s2",
+        "title": "Haganah, Irgun and Stern Veterans Mark Failure to Capture Old City in 1948 War (17 July 1969)",
+        "author": "",
+        "publisher": "Jewish Telegraphic Agency (Jewish news agency)",
+        "url": "https://www.jta.org/archive/haganah-irgun-and-stern-veterans-mark-failure-to-capture-old-city-in-1948-war",
+        "kind": "journalism",
+        "accessed": "2026-11-15",
+        "supports": "Haganah, Irgun and Stern Group (Lehi) veterans marked the anniversary of their abortive attempt to capture the Old City in 1948; Menachem Begin said one gate was broken through; Israeli forces drove Jordanian forces out of the Old City in June 1967",
+        "via": ""
+      }
+    ],
+    "status": "draft"
+  },
+  {
     "id": "second-truce-1948",
     "title": "Second truce begins",
     "type": "ceasefire",
@@ -4078,6 +4429,200 @@
         "accessed": "2026-11-15",
         "supports": "Attack on the Old City planned for the evening of 16 July, 'a day before the second cease-fire'; began at 02:30; only the Irgun broke through at the New Gate; Shaltiel ordered a halt at 05:45",
         "via": "Irgun (etzel.org.il) pages listed as external links"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "operation-shoter-1948",
+    "title": "Operation Shoter: capture of Ijzim, Ein Ghazal and Jaba'",
+    "altNames": [
+      {
+        "name": "Operation Shoter ('Policeman')",
+        "usage": "Israeli operation name"
+      },
+      {
+        "name": "Operation Jaba'",
+        "usage": "another Israeli name, given by Wikipedia"
+      },
+      {
+        "name": "the 'Little Triangle'",
+        "usage": "name for the three-village area"
+      },
+      {
+        "name": "Ayn Ghazal / 'Ayn Ghazal",
+        "usage": "other spellings of Ein Ghazal"
+      }
+    ],
+    "type": "military-operation",
+    "start": "1948-07-24",
+    "end": "1948-07-26",
+    "importance": 2,
+    "place": {
+      "name": "Ijzim, with nearby Ein Ghazal and Jaba' (the 'Little Triangle')",
+      "lat": 32.64472222,
+      "lon": 34.98805556,
+      "precision": "approximate",
+      "note": "The pin marks Ijzim, the largest of three Palestinian villages on the south-western slopes of Mount Carmel, about 20 km south of Haifa. Ijzim is partly destroyed and most of Ein Ghazal and Jaba' were destroyed in 1948. Kerem Maharal (1949) stands on or near the Ijzim site; sources differ on whether it is on village land."
+    },
+    "summary": "Ijzim, Ein Ghazal and Jaba', three Palestinian villages south of Haifa known as the 'Little Triangle', had beaten off Israeli attacks on 18 June and 8 July 1948, and their fighters blocked traffic on the Tel Aviv–Haifa coastal road. After the second truce began on 18 July, Israel presented its attack as a 'police operation' against residents of territory it considered its own; the villages were bombed from the air and then attacked by Alexandroni, Golani and Carmeli brigade units on 24–25 July. They fell on 26 July, the road was reopened, and almost all of the villagers, about 7,000–8,000 people, fled or were driven out, many to the Jenin area. A UN investigation later found the attack unjustified and a breach of the truce, but Israel refused its demand to let the villagers return.",
+    "parties": [
+      "Israel Defense Forces (Alexandroni, Golani and Carmeli brigades, military police)",
+      "Israeli Air Force",
+      "local village militias of the Little Triangle",
+      "UN Mediator Folke Bernadotte and UN observers"
+    ],
+    "disputes": [
+      {
+        "about": "number killed",
+        "accounts": [
+          {
+            "claim": "About 130 villagers killed or missing, according to the UN investigation reported by Bernadotte in September 1948.",
+            "sources": [
+              "s1",
+              "s2"
+            ]
+          },
+          {
+            "claim": "UN observers who visited the refugees near Jenin counted 8,111 people, with 62 declared killed and 63 missing.",
+            "sources": [
+              "s1"
+            ]
+          },
+          {
+            "claim": "An IDF report said about 200 bodies were found and buried; 60 Arabs were killed as they fled.",
+            "sources": [
+              "s1"
+            ]
+          },
+          {
+            "claim": "Arab League Secretary-General Azzam Pasha said many people had been massacred, including 28, mostly refugees from al-Tira, burned alive.",
+            "sources": [
+              "s1",
+              "s2"
+            ]
+          },
+          {
+            "claim": "The IDF rejected the atrocity claims but said soldiers had found 25–30 badly decomposed bodies at Ein Ghazal and burned them; a UN observer who visited on 28 July found 'no evidence to support claims of massacre'.",
+            "sources": [
+              "s1"
+            ]
+          }
+        ]
+      },
+      {
+        "about": "whether the villagers fled or were expelled",
+        "accounts": [
+          {
+            "claim": "Historian Benny Morris: most residents fled or were expelled before, during or after the attack; almost all who remained were forced to leave or 'spontaneously fle[d] eastwards'.",
+            "sources": [
+              "s1",
+              "s2"
+            ]
+          },
+          {
+            "claim": "Bernadotte: about 8,000 people were 'driven out' of the three villages; the UN's September report found all inhabitants had been forced to evacuate.",
+            "sources": [
+              "s2",
+              "s1"
+            ]
+          },
+          {
+            "claim": "Prisoners and villagers said people fleeing were repeatedly fired on by Israeli soldiers and aircraft.",
+            "sources": [
+              "s1",
+              "s2"
+            ]
+          }
+        ]
+      },
+      {
+        "about": "whether the operation broke the truce",
+        "accounts": [
+          {
+            "claim": "Israeli position: a 'police operation' against residents of territory allotted to the Jewish state who kept firing on traffic during the truce; Ben-Gurion told the cabinet 'These villages are in our pocket'.",
+            "sources": [
+              "s1"
+            ]
+          },
+          {
+            "claim": "The IDF's own History of the War of Independence later called it 'actually a military operation', and All That Remains says the name was chosen to cover a clear breach of the second truce.",
+            "sources": [
+              "s2"
+            ]
+          },
+          {
+            "claim": "Bernadotte's report of 8 September: the attack was unjustified and violated the truce, the villagers had offered to negotiate, and two villages were 'systematically' destroyed; he called for the villagers' return, which Israel refused on 28 September.",
+            "sources": [
+              "s1",
+              "s2"
+            ]
+          }
+        ]
+      },
+      {
+        "about": "when the attacks began",
+        "accounts": [
+          {
+            "claim": "Air raids on the villages from 20 July, with the ground attack on the night of 24–25 July.",
+            "sources": [
+              "s1"
+            ]
+          },
+          {
+            "claim": "Bernadotte reported that Israeli forces attacked the villages by air and land for seven days from 18 July, the start of the truce.",
+            "sources": [
+              "s2"
+            ]
+          }
+        ]
+      },
+      {
+        "about": "number of people displaced",
+        "accounts": [
+          {
+            "claim": "About 7,000 to 8,000.",
+            "sources": [
+              "s1"
+            ]
+          },
+          {
+            "claim": "8,000, according to Bernadotte as quoted by The Times.",
+            "sources": [
+              "s2"
+            ]
+          },
+          {
+            "claim": "4,000 made refugees and 10,000 captured, according to the Arab League Secretary-General at the time.",
+            "sources": [
+              "s2"
+            ]
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "s1",
+        "title": "Operation Shoter",
+        "author": "",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Operation_Shoter",
+        "kind": "reference",
+        "accessed": "2026-11-15",
+        "supports": "three villages of the Little Triangle closing the Tel Aviv–Haifa road; failed attacks on 18 June and 8 July; Ben-Gurion's 'police operation' remark and partition-plan justification; air bombing 20–24 July; Alexandroni, Golani and Carmeli attack 24–26 July; surrender on 26 July; road reopened; 7,000–8,000 fled or expelled; casualty figures from the UN, IDF and Arab League; UN observer's 'no evidence' finding and Bernadotte's 8 September report; Sharett's refusal on 28 September",
+        "via": "Benny Morris; Meron Benvenisti; reports of UN Mediator Folke Bernadotte (as summarised in the article)"
+      },
+      {
+        "id": "s2",
+        "title": "Ijzim (village page)",
+        "author": "",
+        "publisher": "Zochrot (Israeli NGO that promotes acknowledgment of the Nakba)",
+        "url": "https://www.zochrot.org/villages/village_details/48978/en",
+        "kind": "organization",
+        "accessed": "2026-11-15",
+        "supports": "Ijzim 19.5 km from Haifa on Mount Carmel, 1948 population 3,450; with Ayn Ghazal and Jaba' it held out until late July and blocked the coastal road; attempts on 18 June and 8 July; IDF History's description of a 'police operation' that was 'actually a military operation'; attack from 24 July, capture two days later after artillery and air bombardment; occupying units Golani, Carmeli and Alexandroni; Bernadotte's reports (attacks from 18 July, villagers tried to negotiate, 8,000 driven out to the Jenin area, order to readmit them refused); Arab League claims; UN figure of 130 killed and missing; Kerem Maharal built on the site in 1949",
+        "via": "Walid Khalidi (ed.), All That Remains (1992), citing the IDF's History of the War of Independence, Folke Bernadotte's reports, the Associated Press, The Times and Benny Morris"
       }
     ],
     "status": "draft"
@@ -5819,6 +6364,68 @@
         "accessed": "2026-11-15",
         "supports": "conference in Lausanne from April 1949 with separate talks; Arab demand to settle refugees first versus Israel's insistence on linking it to a territorial settlement; the 12 May protocols and Israel's reservations",
         "via": "UNCCP progress reports (quoted in the study)"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "israel-un-admission-1949",
+    "title": "Israel admitted to the United Nations",
+    "altNames": [
+      {
+        "name": "General Assembly Resolution 273 (III)",
+        "usage": "UN resolution admitting Israel"
+      }
+    ],
+    "type": "diplomatic",
+    "start": "1949-05-11",
+    "importance": 2,
+    "place": {
+      "name": "Flushing Meadow, New York",
+      "lat": 40.74583333,
+      "lon": -73.84472222,
+      "precision": "approximate",
+      "note": "The official record says the 207th plenary meeting was 'held at Flushing Meadow, New York'. The committee debate before it was held at Lake Success, New York. Coordinates are Wikipedia's for Flushing Meadows–Corona Park, not for the exact meeting hall."
+    },
+    "summary": "On 11 May 1949 the UN General Assembly, meeting in plenary at Flushing Meadow, New York, voted 37 to 12, with 9 abstentions, to admit Israel as a member state, meeting the two-thirds majority required; Assembly President H. V. Evatt then formally declared Israel admitted. The vote, Resolution 273, followed a Security Council recommendation (Resolution 69 of 4 March 1949) and a debate in the Assembly's Ad Hoc Political Committee at Lake Success. There, Israel's representative Abba Eban was asked how Israel would carry out the Assembly's earlier resolutions on Jerusalem (181) and on the refugees (194), and said Israel would cooperate on the refugee resolution. Arab states voted against, and the United Kingdom was among the countries that abstained.",
+    "parties": [
+      "United Nations General Assembly",
+      "Israel",
+      "Arab member states (voted against)"
+    ],
+    "sources": [
+      {
+        "id": "s1",
+        "title": "Two hundred and seventh plenary meeting, held at Flushing Meadow, New York, on Wednesday, 11 May 1949 (A/PV.207)",
+        "author": "",
+        "publisher": "United Nations General Assembly",
+        "url": "https://documents.un.org/api/symbol/access?s=A/PV.207&l=en&t=pdf",
+        "kind": "primary",
+        "accessed": "2026-11-15",
+        "supports": "venue ('Held at Flushing Meadow, New York') and date; item 'Application of Israel for admission'; roll-call result of 37 in favour, 12 against and 9 abstentions with the required two-thirds majority; list of states against (including Egypt, Iraq, Lebanon, Saudi Arabia, Syria, Yemen) and abstaining (including the United Kingdom); President Evatt formally declared Israel admitted; Israel's representative Moshe Sharett took his seat and addressed the Assembly",
+        "via": ""
+      },
+      {
+        "id": "s2",
+        "title": "Israel's membership in the UN – Ad Hoc Political Committee – Summary record, 47th meeting, held at Lake Success, New York, 6 May 1949 (A/AC.24/SR.47)",
+        "author": "",
+        "publisher": "United Nations (UNISPAL document collection)",
+        "url": "https://www.un.org/unispal/document/auto-insert-185978/",
+        "kind": "primary",
+        "accessed": "2026-11-15",
+        "supports": "the committee stage of Israel's application was held at Lake Success; Abba Eban questioned by El Salvador on resolutions 181 (II) and 194 (III) and on the assassination of Count Bernadotte",
+        "via": ""
+      },
+      {
+        "id": "s3",
+        "title": "United Nations General Assembly Resolution 273",
+        "author": "",
+        "publisher": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/United_Nations_General_Assembly_Resolution_273",
+        "kind": "reference",
+        "accessed": "2026-11-15",
+        "supports": "adopted 11 May 1949 to admit Israel; followed Security Council Resolution 69 of 4 March 1949; 37–12–9 vote and full voting list; El Salvador's question and Eban's answers on resolutions 181 and 194",
+        "via": "Francis A. Boyle, Palestine, Palestinians and International Law (2010); UN official records"
       }
     ],
     "status": "draft"
