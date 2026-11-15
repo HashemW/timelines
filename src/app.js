@@ -23,6 +23,13 @@ const CATEGORIES = {
   life:      { label: "Life events", color: "#3c7a4a" },
 };
 const PHASE_COLORS = ["#eadcc2", "#dfe7d5", "#ecd5cf", "#d8e2eb", "#efe3c8", "#e1d9ea", "#d6e6e1"];
+// Border / area layers (topic.json "layers"): a style per kind of line.
+const LAYER_STYLES = {
+  reference: { "line-color": "#6f665a", "line-width": 1.3, "line-opacity": 0.7, "line-dasharray": [3, 2] },
+  armistice: { "line-color": "#2e7d32", "line-width": 2.4, "line-opacity": 0.9 },
+  zone:      { "line-color": "#2e7d32", "line-width": 1.4, "line-opacity": 0.9, "line-dasharray": [2, 1.5] },
+  plan:      { "line-color": "#a0522d", "line-width": 1.8, "line-opacity": 0.85, "line-dasharray": [1, 1.5] },
+};
 
 /* ---------- dates ----------
  * Data uses partial ISO strings ("1948", "1948-07", "1948-07-12").
@@ -80,7 +87,7 @@ async function getJSON(path, optional = false) {
 
 /* ---------- state ---------- */
 const state = {
-  topic: null, events: [], phases: [], places: null,
+  topic: null, events: [], phases: [], places: null, layers: [],
   min: 0, max: 0, day: 0, selected: null, timer: null, speed: 3, earlierOpen: false,
 };
 let map;
@@ -154,6 +161,7 @@ function initMap() {
   window.addEventListener("resize", applyPadding);
 
   map.on("load", () => {
+    addBorderLayers();
     addPlaceLayers();
     addEventLayers();
     render();
@@ -167,6 +175,57 @@ function applyPadding() {
   map.setPadding(narrow
     ? { top: 60, bottom: panel.height + 16, left: 0, right: 0 }
     : { top: 0, bottom: 0, left: 0, right: panel.width + 24 });
+}
+
+function addBorderLayers() {
+  for (const l of state.layers) {
+    map.addSource(`layer-${l.id}`, { type: "geojson", data: l.url });
+    map.addLayer({
+      id: `layer-${l.id}`, type: "line", source: `layer-${l.id}`,
+      layout: { "line-join": "round", "line-cap": "round", visibility: "none" },
+      paint: LAYER_STYLES[l.style] || LAYER_STYLES.reference,
+    });
+  }
+  const labels = state.layers.flatMap((l) => (l.labels || []).map((lb) => ({
+    type: "Feature",
+    properties: { text: lb.text, layer: l.id, s: toDay(lb.start || l.start, "start"), e: toDay(lb.end || l.end, "end") },
+    geometry: { type: "Point", coordinates: [lb.lon, lb.lat] },
+  })));
+  map.addSource("layer-labels", { type: "geojson", data: { type: "FeatureCollection", features: labels } });
+  map.addLayer({
+    id: "layer-labels", type: "symbol", source: "layer-labels", filter: ["==", ["get", "layer"], ""],
+    layout: {
+      "text-field": ["get", "text"], "text-font": ["Noto Sans Italic"], "text-size": 12, "text-max-width": 9,
+      "text-allow-overlap": true,
+    },
+    paint: { "text-color": "#2e6b32", "text-halo-color": "rgba(251,248,241,.85)", "text-halo-width": 1.4 },
+  });
+}
+
+function updateBorderLayers() {
+  if (!map?.getLayer("layer-labels")) return;
+  const day = state.day;
+  for (const l of state.layers) {
+    const visible = l.on && day >= l.s && day <= l.e;
+    map.setLayoutProperty(`layer-${l.id}`, "visibility", visible ? "visible" : "none");
+  }
+  const on = state.layers.filter((l) => l.on).map((l) => l.id);
+  map.setFilter("layer-labels", ["all",
+    ["in", ["get", "layer"], ["literal", on]], ["<=", ["get", "s"], day], [">=", ["get", "e"], day]]);
+}
+
+function layersHTML() {
+  if (!state.layers.length) return "";
+  return `<div class="layers"><h2>Map layers</h2>${state.layers.map((l) => {
+    const inRange = state.day >= l.s && state.day <= l.e;
+    return `<label class="layer"><input type="checkbox" data-layer="${esc(l.id)}"${l.on ? " checked" : ""}>
+      <span class="swatch ${esc(l.style)}"></span>
+      <span><span class="item-title">${esc(l.title)}</span>
+      <span class="item-meta">${esc(fmtRange(l.start, l.end))}${inRange ? "" : " · not on the map at this date"}</span></span></label>
+      <details class="layer-about"${state.openLayerInfo === l.id ? " open" : ""} data-layer-info="${esc(l.id)}"><summary>About this layer</summary>
+      <p>${esc(l.note || "")}</p><ol class="sources">${(l.sources || []).map((s) => sourceHTML(s, `layer-${l.id}`)).join("")}</ol>
+      ${l.status !== "reviewed" ? `<p class="draft">Draft: not yet checked by a person.</p>` : ""}</details>`;
+  }).join("")}</div>`;
 }
 
 function addPlaceLayers() {
@@ -412,6 +471,7 @@ function renderList() {
     html += `<details class="earlier"${state.earlierOpen ? " open" : ""}><summary>Earlier events (${groups.past.length})</summary>
       ${[...groups.past].reverse().map((ev) => itemHTML(ev, "past")).join("")}</details>`;
   }
+  html += layersHTML();
   html += `<div class="legend">${Object.entries(CATEGORIES)
     .filter(([k]) => state.events.some((ev) => ev.category === k))
     .map(([, c]) => `<div><span class="dot" style="background:${c.color}"></span>${esc(c.label)}</div>`).join("")}
@@ -469,7 +529,13 @@ $("panel-body").addEventListener("click", (e) => {
 });
 $("panel-body").addEventListener("toggle", (e) => {
   if (e.target.classList?.contains("earlier")) state.earlierOpen = e.target.open;
+  if (e.target.dataset?.layerInfo) state.openLayerInfo = e.target.open ? e.target.dataset.layerInfo : null;
 }, true);
+$("panel-body").addEventListener("change", (e) => {
+  const id = e.target.dataset?.layer;
+  const layer = id && state.layers.find((l) => l.id === id);
+  if (layer) { layer.on = e.target.checked; render(); }
+});
 
 /* ---------- render ---------- */
 function render() {
@@ -486,6 +552,7 @@ function render() {
     map.getSource("events").setData(eventFeatures());
     map.setFilter("ev-selected", ["==", ["get", "id"], state.selected ?? ""]);
   }
+  updateBorderLayers();
   const sel = state.selected && byId(state.selected);
   if (sel) renderDetail(sel); else renderList();
   writeHash();
@@ -509,6 +576,15 @@ function readHash() {
   const e = p.get("e");
   if (e && byId(e)) state.selected = e;
 }
+
+// Someone edits or pastes a link while the page is open.
+window.addEventListener("hashchange", () => {
+  if (!state.topic) return;
+  stop();
+  state.selected = null;
+  readHash();
+  render();
+});
 
 /* ---------- keyboard ---------- */
 document.addEventListener("keydown", (e) => {
@@ -560,6 +636,10 @@ async function main() {
         category: CATEGORY_OF[ev.type] || "political",
       }))
       .sort((a, b) => a.s - b.s || a.importance - b.importance);
+    state.layers = (topic.layers || []).map((l) => ({
+      ...l, url: `${base}${l.file}`, on: l.on !== false,
+      s: toDay(l.start, "start"), e: toDay(l.end, "end"),
+    }));
     state.phases = (topic.phases || []).map((ph, i) => ({
       ...ph, s: toDay(ph.start, "start"), e: toDay(ph.end, "end"), color: PHASE_COLORS[i % PHASE_COLORS.length],
     }));
@@ -579,5 +659,8 @@ async function main() {
       : `Something went wrong loading the data.<br><code>${esc(err.message)}</code>`;
   }
 }
+
+// Handy for debugging from the browser console.
+window.timelines = { state, get map() { return map; } };
 
 main();

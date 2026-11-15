@@ -53,5 +53,7 @@ scripts/validate.mjs        checks the data: run `node scripts/validate.mjs`
 Base map: [OpenFreeMap](https://openfreemap.org) / © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors.
 Relief: [Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) (Mapzen, on AWS Open Data).
 Map rendering: [MapLibre GL JS](https://maplibre.org).
+Historical borders (1948 topic): [OpenHistoricalMap](https://www.openhistoricalmap.org) (CC0), community-traced
+and marked as draft until they've been checked against the original maps.
 The base map deliberately shows no modern borders, roads or city names. Labels come from each
 topic's own period data.

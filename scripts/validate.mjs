@@ -78,6 +78,28 @@ for (const t of topics) {
     checkSources(w, ph.sources);
   }
 
+  const STYLES = new Set(["reference", "armistice", "zone", "plan"]);
+  for (const l of topic.layers || []) {
+    const w = `${t.id} layer "${l.id}"`;
+    if (!l.id || !ID.test(l.id)) err(w, "layer needs a kebab-case id");
+    if (!l.title) err(w, "missing title");
+    if (!l.file || !exists(`${dir}${l.file}`)) err(w, `file "${l.file}" not found`);
+    else {
+      try { const g = read(`${dir}${l.file}`); if (g.type !== "FeatureCollection") err(w, "file must be a GeoJSON FeatureCollection"); }
+      catch { err(w, "file is not valid JSON"); }
+    }
+    if (!STYLES.has(l.style)) err(w, `style must be one of ${[...STYLES].join(", ")}`);
+    checkDate(w, "start", l.start, true);
+    checkDate(w, "end", l.end, true);
+    if (!l.note) warn(w, "explain the layer and its limits in `note`");
+    checkSources(w, l.sources);
+    for (const lb of l.labels || []) {
+      if (!lb.text || typeof lb.lat !== "number" || typeof lb.lon !== "number") err(w, "each label needs text, lat and lon");
+      if (lb.start) checkDate(w, "label start", lb.start, true);
+    }
+    if (!["draft", "reviewed"].includes(l.status)) err(w, `status must be "draft" or "reviewed"`);
+  }
+
   const events = exists(`${dir}events.json`) ? read(`${dir}events.json`) : [];
   const seen = new Set();
   for (const ev of events) {

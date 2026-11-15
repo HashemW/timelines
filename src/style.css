@@ -74,6 +74,17 @@ button { font: inherit; color: inherit; }
 }
 .earlier { margin-top: 14px; }
 .earlier summary { cursor: pointer; color: var(--muted); font-size: 12.5px; }
+.layers { margin-top: 16px; padding-top: 4px; border-top: 1px solid var(--line); }
+.layer { display: flex; gap: 9px; align-items: flex-start; padding: 6px 0 2px; cursor: pointer; }
+.layer input { margin: 3px 0 0; accent-color: var(--accent); }
+.swatch { flex: none; width: 20px; height: 0; margin-top: 9px; border-top: 2px solid #6f665a; }
+.swatch.reference { border-top: 2px dashed #6f665a; }
+.swatch.armistice { border-top: 3px solid #2e7d32; }
+.swatch.zone { border-top: 2px dashed #2e7d32; }
+.swatch.plan { border-top: 2px dotted #a0522d; }
+.layer-about { margin: 0 0 4px 50px; }
+.layer-about summary { font-size: 12px; color: var(--muted); cursor: pointer; }
+.layer-about p { font-size: 12.5px; margin: 6px 0; }
 .legend { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
 .legend div { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
 .legend .dot { width: 9px; height: 9px; border-radius: 50%; }

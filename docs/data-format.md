@@ -114,3 +114,30 @@ cites a book you did not open yourself.
 
 Phases appear as coloured bands on the time slider, so a beginner can see the shape of
 the whole story before reading any single event.
+
+## Map layers (borders, lines, areas)
+
+Optional, per topic: some topics have good border data, many don't. Each layer is a GeoJSON
+file in the topic folder, listed in `topic.json` under `layers`:
+
+```json
+{
+  "id": "armistice-1949",
+  "title": "1949 armistice lines",
+  "file": "borders/armistice-lines-1949.geojson",
+  "style": "armistice",
+  "start": "1949-02-24",
+  "end": "1949-07-20",
+  "on": true,
+  "note": "What the line is, how it was made, and its limits.",
+  "labels": [{ "text": "Held by Egypt (Gaza Strip)", "lat": 31.42, "lon": 34.4, "start": "1949-02-24" }],
+  "sources": [ … ],
+  "status": "draft"
+}
+```
+
+- The layer is drawn only while the slider is between `start` and `end`. Readers can switch it off.
+- `style`: `reference` (dashed grey frame), `armistice` (solid green), `zone` (dashed green),
+  `plan` (dotted, for proposals that were never in force, like a partition plan).
+- Geometry needs sources like everything else. Say in `note` who traced it, from what, and how
+  far it has been checked.
