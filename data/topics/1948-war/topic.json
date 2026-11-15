@@ -1,0 +1,43 @@
+{
+  "id": "1948-war",
+  "title": "The 1948 War",
+  "names": [
+    { "name": "1948 Arab–Israeli War / 1948 Palestine war", "usage": "common English names" },
+    { "name": "War of Independence (Milhemet Ha'atzma'ut)", "usage": "name used in Israel" },
+    { "name": "al-Nakba (\"the catastrophe\")", "usage": "name used by Palestinians and in the Arab world" }
+  ],
+  "summary": "The war was fought in British-ruled Mandatory Palestine. On 29 November 1947 the UN General Assembly adopted Resolution 181, a plan to divide the territory into Jewish and Arab states, and the next day fighting began as a civil war between the Jewish and Arab communities. On 14 May 1948 Israel declared independence, and the armies of neighbouring Arab states entered. Fighting, interrupted by UN-brokered truces, went on into 1949 and ended with separate armistice agreements between Israel and Egypt, Lebanon, Transjordan and Syria. Israel ended the war holding about 78% of the former mandate, more than the UN plan had given the Jewish state; Transjordan held the West Bank and Egypt the Gaza Strip. More than 700,000 Palestinians, over half of the Palestinian population, fled or were expelled. Palestinians call this mass displacement and dispossession the Nakba.",
+  "sources": [
+    {
+      "id": "ooh",
+      "title": "The Arab-Israeli War of 1948 (Milestones in the History of U.S. Foreign Relations)",
+      "publisher": "Office of the Historian, U.S. Department of State",
+      "url": "https://history.state.gov/milestones/1945-1952/arab-israeli-war",
+      "kind": "organization",
+      "accessed": "2026-11-15",
+      "supports": "Resolution 181 (29 Nov 1947); declaration 14 May 1948 and the Arab armies' entry; two UN cease-fires; separate armistices with Egypt, Lebanon, Transjordan and Syria; Israel gained territory allotted to the Arab state; Egypt and Jordan held Gaza and the West Bank"
+    },
+    {
+      "id": "wp",
+      "title": "1948 Palestine war",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/1948_Palestine_war",
+      "kind": "reference",
+      "accessed": "2026-11-15",
+      "supports": "fought in Mandatory Palestine; civil war from 30 Nov 1947; about 78% of the mandate; over 700,000 Palestinians expelled or fled; names (War of Independence, Nakba)"
+    },
+    {
+      "id": "un-nakba",
+      "title": "About the Nakba",
+      "publisher": "United Nations, Question of Palestine",
+      "url": "https://www.un.org/unispal/about-the-nakba/",
+      "kind": "organization",
+      "accessed": "2026-11-15",
+      "supports": "meaning of Nakba (mass displacement and dispossession of Palestinians in the 1948 war); displacement of more than half of the Palestinian population"
+    }
+  ],
+  "start": "1947-11-29",
+  "end": "1949-07-20",
+  "view": { "center": [34.95, 31.55], "zoom": 7.2 },
+  "phases": []
+}

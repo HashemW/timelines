@@ -1,0 +1,49 @@
+{
+  "note": "Reference labels for orientation. Names are those used in 1947–49; modern names in `modern`. Town coordinates from Wikipedia's coordinate data (accessed 2026-11-15); region labels are placed by hand and only mark the general area.",
+  "sources": [
+    {
+      "id": "wp-coords",
+      "title": "Wikipedia coordinate data (prop=coordinates API) for each town's article",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&colimit=max&coprimary=primary&redirects=1&format=json&titles=Jerusalem|Tel_Aviv|Jaffa|Haifa|Acre,_Israel|Nazareth|Safed|Tiberias|Gaza_City|Ashkelon|Beersheba|Hebron|Bethlehem|Nablus|Jenin|Tulkarm|Lod|Ramla|Jericho|Amman|Rafah|Khan_Yunis|Isdud|Beirut|Damascus|Arish",
+      "kind": "reference",
+      "accessed": "2026-11-15"
+    }
+  ],
+  "towns": [
+    { "name": "Jerusalem", "lat": 31.7767, "lon": 35.2342, "rank": 1, "note": "point is the Old City" },
+    { "name": "Tel Aviv", "lat": 32.08, "lon": 34.78, "rank": 1 },
+    { "name": "Jaffa", "lat": 32.0522, "lon": 34.7531, "rank": 1, "modern": "part of Tel Aviv-Yafo" },
+    { "name": "Haifa", "lat": 32.8192, "lon": 34.9992, "rank": 1 },
+    { "name": "Gaza", "lat": 31.5075, "lon": 34.4597, "rank": 1 },
+    { "name": "Acre", "lat": 32.9278, "lon": 35.0817, "rank": 2, "modern": "Akko" },
+    { "name": "Nazareth", "lat": 32.7019, "lon": 35.3033, "rank": 2 },
+    { "name": "Safed", "lat": 32.9658, "lon": 35.4983, "rank": 2, "modern": "Tzfat" },
+    { "name": "Tiberias", "lat": 32.7944, "lon": 35.5333, "rank": 2 },
+    { "name": "Beersheba", "lat": 31.2522, "lon": 34.7867, "rank": 2, "modern": "Be'er Sheva" },
+    { "name": "Hebron", "lat": 31.5286, "lon": 35.0969, "rank": 2 },
+    { "name": "Nablus", "lat": 32.2211, "lon": 35.2608, "rank": 2 },
+    { "name": "Lydda", "lat": 31.9519, "lon": 34.8881, "rank": 2, "modern": "Lod" },
+    { "name": "Ramle", "lat": 31.9275, "lon": 34.8625, "rank": 2, "modern": "Ramla" },
+    { "name": "Majdal", "lat": 31.6667, "lon": 34.5667, "rank": 2, "modern": "Ashkelon", "note": "approximate: point is modern Ashkelon" },
+    { "name": "Bethlehem", "lat": 31.7044, "lon": 35.2064, "rank": 3 },
+    { "name": "Jenin", "lat": 32.4611, "lon": 35.3, "rank": 3 },
+    { "name": "Tulkarm", "lat": 32.3125, "lon": 35.0267, "rank": 3 },
+    { "name": "Jericho", "lat": 31.8561, "lon": 35.46, "rank": 3 },
+    { "name": "Isdud", "lat": 31.7536, "lon": 34.6617, "rank": 3, "modern": "near Ashdod; depopulated 1948" },
+    { "name": "Khan Yunis", "lat": 31.3444, "lon": 34.3031, "rank": 3 },
+    { "name": "Rafah", "lat": 31.2725, "lon": 34.2586, "rank": 3 },
+    { "name": "al-Arish", "lat": 31.1321, "lon": 33.8034, "rank": 3 },
+    { "name": "Amman", "lat": 31.9497, "lon": 35.9328, "rank": 1 },
+    { "name": "Beirut", "lat": 33.8981, "lon": 35.5058, "rank": 1 },
+    { "name": "Damascus", "lat": 33.5131, "lon": 36.3094, "rank": 1 }
+  ],
+  "regions": [
+    { "name": "GALILEE", "lat": 32.93, "lon": 35.33 },
+    { "name": "NEGEV", "lat": 30.75, "lon": 34.82 },
+    { "name": "SINAI (EGYPT)", "lat": 30.25, "lon": 33.6 },
+    { "name": "TRANSJORDAN", "lat": 31.2, "lon": 36.25 },
+    { "name": "LEBANON", "lat": 33.72, "lon": 35.82 },
+    { "name": "SYRIA", "lat": 32.95, "lon": 36.45 }
+  ]
+}

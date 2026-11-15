@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Timelines</title>
+  <meta name="description" content="History on a map: scrub through time and see where things happened.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+  <link href="src/style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="map" aria-label="Map"></div>
+
+  <header id="intro" class="card">
+    <div class="brand">Timelines</div>
+    <h1 id="topic-title">Loading…</h1>
+    <p id="topic-names"></p>
+    <details id="topic-about">
+      <summary>About this topic</summary>
+      <p id="topic-summary"></p>
+      <ol id="topic-sources" class="sources"></ol>
+    </details>
+  </header>
+
+  <aside id="panel" class="card">
+    <div id="now">
+      <div class="now-row">
+        <button id="prev" class="step" title="Previous event (←)" aria-label="Previous event">‹</button>
+        <div class="now-text">
+          <div id="now-date"></div>
+          <div id="now-phase"></div>
+        </div>
+        <button id="next" class="step" title="Next event (→)" aria-label="Next event">›</button>
+      </div>
+    </div>
+    <div id="panel-body"></div>
+  </aside>
+
+  <footer id="timebar">
+    <button id="play" aria-label="Play">▶</button>
+    <div id="track">
+      <div id="phases"></div>
+      <div id="ticks"></div>
+      <input id="slider" type="range" step="1" aria-label="Date">
+      <div id="axis"></div>
+    </div>
+    <label class="speed">
+      <span>Speed</span>
+      <select id="speed">
+        <option value="1">Slow</option>
+        <option value="3" selected>Normal</option>
+        <option value="7">Fast</option>
+      </select>
+    </label>
+  </footer>
+
+  <div id="error" hidden></div>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
