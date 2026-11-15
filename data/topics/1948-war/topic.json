@@ -2,9 +2,18 @@
   "id": "1948-war",
   "title": "The 1948 War",
   "names": [
-    { "name": "1948 Arab–Israeli War / 1948 Palestine war", "usage": "common English names" },
-    { "name": "War of Independence (Milhemet Ha'atzma'ut)", "usage": "name used in Israel" },
-    { "name": "al-Nakba (\"the catastrophe\")", "usage": "name used by Palestinians and in the Arab world" }
+    {
+      "name": "1948 Arab–Israeli War / 1948 Palestine war",
+      "usage": "common English names"
+    },
+    {
+      "name": "War of Independence (Milhemet Ha'atzma'ut)",
+      "usage": "name used in Israel"
+    },
+    {
+      "name": "al-Nakba (\"the catastrophe\")",
+      "usage": "name used by Palestinians and in the Arab world"
+    }
   ],
   "summary": "The war was fought in British-ruled Mandatory Palestine. On 29 November 1947 the UN General Assembly adopted Resolution 181, a plan to divide the territory into Jewish and Arab states, and the next day fighting began as a civil war between the Jewish and Arab communities. On 14 May 1948 Israel declared independence, and the armies of neighbouring Arab states entered. Fighting, interrupted by UN-brokered truces, went on into 1949 and ended with separate armistice agreements between Israel and Egypt, Lebanon, Transjordan and Syria. Israel ended the war holding about 78% of the former mandate, more than the UN plan had given the Jewish state; Transjordan held the West Bank and Egypt the Gaza Strip. More than 700,000 Palestinians, over half of the Palestinian population, fled or were expelled. Palestinians call this mass displacement and dispossession the Nakba.",
   "sources": [
@@ -38,6 +47,297 @@
   ],
   "start": "1947-11-29",
   "end": "1949-07-20",
-  "view": { "center": [34.95, 31.55], "zoom": 7.2 },
-  "phases": []
+  "view": {
+    "center": [
+      34.95,
+      31.55
+    ],
+    "zoom": 7.2
+  },
+  "phases": [
+    {
+      "title": "Civil war in Mandatory Palestine",
+      "start": "1947-11-30",
+      "end": "1948-05-14",
+      "sources": [
+        {
+          "id": "p1",
+          "title": "1947–1948 civil war in Mandatory Palestine",
+          "author": "",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/1947%E2%80%931948_civil_war_in_Mandatory_Palestine",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "the infobox dates the civil war 30 November 1947 – 14 May 1948, while the lead gives 29 November 1947 – 14 May 1948; it was the first phase of the 1948 Palestine war and ended with the end of the Mandate and the declaration of Israel on 14 May 1948",
+          "via": ""
+        },
+        {
+          "id": "p2",
+          "title": "1948 Arab–Israeli War",
+          "author": "",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/1948_Arab%E2%80%93Israeli_War",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "the civil war in Mandatory Palestine (given as 29 November 1947 – 14 May 1948) was followed by the Arab–Israeli War from 15 May 1948; violence began the day after the partition vote",
+          "via": ""
+        },
+        {
+          "id": "p3",
+          "title": "1948 Arab-Israeli War",
+          "author": "The Editors of Encyclopaedia Britannica",
+          "publisher": "Encyclopaedia Britannica",
+          "url": "https://www.britannica.com/event/1948-Arab-Israeli-War",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "a civil war took place from November 1947 to May 1948, beginning after the 29 November 1947 vote; the bus attack of 30 November 1947 is 'often cited as the start of the civil war'; the war between Israel and the Arab states formally began on 15 May 1948",
+          "via": ""
+        }
+      ]
+    },
+    {
+      "title": "Arab states' armies enter",
+      "start": "1948-05-15",
+      "end": "1948-06-11",
+      "sources": [
+        {
+          "id": "p1",
+          "title": "1948 Arab–Israeli War (article)",
+          "author": "",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/1948_Arab%E2%80%93Israeli_War",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "Section heading 'First phase: 15 May – 11 June 1948'; armies invaded on the morning of 15 May",
+          "via": ""
+        },
+        {
+          "id": "p2",
+          "title": "Cablegram dated 15 May 1948 addressed to the Secretary-General by the Secretary-General of the League of Arab States (S/745)",
+          "author": "Secretary-General of the League of Arab States",
+          "publisher": "United Nations, UNISPAL (Arab League voice)",
+          "url": "https://www.un.org/unispal/document/auto-insert-214183/",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "Dated 15 May 1948, 'on the occasion of the intervention of Arab States in Palestine'",
+          "via": "UN document S/745"
+        },
+        {
+          "id": "p3",
+          "title": "Progress Report of the United Nations Mediator on Palestine (A/648), 16 September 1948",
+          "author": "Folke Bernadotte (UN Mediator on Palestine)",
+          "publisher": "United Nations, UNISPAL",
+          "url": "https://www.un.org/unispal/document/auto-insert-198227/",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "End point: the four-week truce went into effect on 11 June 1948 (fighting continued until it took effect that day, so this band and the next share 11 June)",
+          "via": ""
+        }
+      ]
+    },
+    {
+      "title": "First truce",
+      "start": "1948-06-11",
+      "end": "1948-07-08",
+      "sources": [
+        {
+          "id": "p1",
+          "title": "Progress Report of the United Nations Mediator on Palestine (A/648), 16 September 1948",
+          "author": "Folke Bernadotte (UN Mediator on Palestine)",
+          "publisher": "United Nations, UNISPAL",
+          "url": "https://www.un.org/unispal/document/auto-insert-198227/",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "'The four-week truce from 11 June to 9 July 1948'; it went into effect on 11 June; 'hostilities broke out again on 8 July', a day before it formally expired",
+          "via": ""
+        },
+        {
+          "id": "p2",
+          "title": "1948 Arab–Israeli War (article)",
+          "author": "",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/1948_Arab%E2%80%93Israeli_War",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "Section heading 'First truce: 11 June – 8 July 1948'",
+          "via": ""
+        },
+        {
+          "id": "p3",
+          "title": "United Nations Security Council Resolution 50 (S/801), 29 May 1948",
+          "author": "UN Security Council",
+          "publisher": "Yale Law School, Avalon Project (text of the resolution)",
+          "url": "https://avalon.law.yale.edu/20th_century/scres050.asp",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "Cessation of armed force 'for a period of four weeks'",
+          "via": "UN document S/801"
+        }
+      ]
+    },
+    {
+      "title": "The Ten Days",
+      "start": "1948-07-08",
+      "end": "1948-07-18",
+      "sources": [
+        {
+          "id": "p1",
+          "title": "1948 Arab–Israeli War (article)",
+          "author": "",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/1948_Arab%E2%80%93Israeli_War",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "Section heading 'Second phase: 8–18 July 1948 (\"Ten Day Battles\")'; fighting began 8 July, the day before the truce expired, and continued for ten days until the second truce on 18 July",
+          "via": ""
+        },
+        {
+          "id": "p2",
+          "title": "Progress Report of the United Nations Mediator on Palestine (A/648), 16 September 1948",
+          "author": "Folke Bernadotte (UN Mediator on Palestine)",
+          "publisher": "United Nations, UNISPAL",
+          "url": "https://www.un.org/unispal/document/auto-insert-198227/",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "'The renewal of the fighting between 8 and 18 July'; cease-fire effective in Jerusalem on 16 July and elsewhere on 18 July (fixed at 1500 GMT)",
+          "via": ""
+        },
+        {
+          "id": "p3",
+          "title": "United Nations Security Council Resolution 54 (S/902), 15 July 1948",
+          "author": "UN Security Council",
+          "publisher": "Yale Law School, Avalon Project (text of the resolution)",
+          "url": "https://avalon.law.yale.edu/20th_century/scres054.asp",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "Order of 15 July for a cease-fire within three days, which ended this phase",
+          "via": "UN document S/902"
+        }
+      ]
+    },
+    {
+      "title": "Second truce and later offensives",
+      "start": "1948-07-18",
+      "end": "1949-01-07",
+      "sources": [
+        {
+          "id": "p1s1",
+          "title": "1948 Arab–Israeli War",
+          "author": "",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/1948_Arab%E2%80%93Israeli_War",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "start: the second truce went into effect at 19:00 on 18 July 1948; end: the Egyptians agreed to negotiate a ceasefire on 7 January 1949. Note: this article divides the period differently ('Second truce: 18 July – 15 October 1948' and 'Third phase: 15 October 1948 – 10 March 1949')",
+          "via": ""
+        },
+        {
+          "id": "p1s2",
+          "title": "Mideast situation/Situation in Southern Negev – Cablegram from UN Acting Mediator (S/1295, 22 March 1949)",
+          "author": "Ralph Bunche, UN Acting Mediator",
+          "publisher": "United Nations (UNISPAL)",
+          "url": "https://www.un.org/unispal/document/auto-insert-212014/",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "start: 'the existing Truce came into effect on 18 July 1948'",
+          "via": ""
+        },
+        {
+          "id": "p1s3",
+          "title": "Modern History of Israel: The Assassination of Count Bernadotte",
+          "author": "",
+          "publisher": "Jewish Virtual Library (American-Israeli Cooperative Enterprise, a pro-Israel educational nonprofit)",
+          "url": "https://jewishvirtuallibrary.org/the-assassination-of-count-bernadotte",
+          "kind": "organization",
+          "accessed": "2026-11-15",
+          "supports": "start: a second UN cease-fire was declared on 18 July 1948, with no time limit",
+          "via": ""
+        },
+        {
+          "id": "p1s4",
+          "title": "Operation Horev",
+          "author": "",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Operation_Horev",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "end: the last offensive ran to 7 January 1949, when Israel accepted the ceasefire",
+          "via": ""
+        },
+        {
+          "id": "p1s5",
+          "title": "Egypt-Israel Cease-Fire Agreement – Cablegram from UN Acting Mediator (S/1205, 12 January 1949)",
+          "author": "Ralph Bunche, UN Acting Mediator",
+          "publisher": "United Nations (UNISPAL)",
+          "url": "https://www.un.org/unispal/document/auto-insert-210596/",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "end: refers to Bunche's report of 6 January on Egypt's and Israel's agreement to a cease-fire in the Negev",
+          "via": ""
+        }
+      ]
+    },
+    {
+      "title": "Armistice agreements",
+      "start": "1949-01-12",
+      "end": "1949-07-20",
+      "sources": [
+        {
+          "id": "p2s1",
+          "title": "Egypt-Israel Cease-Fire Agreement – Cablegram from UN Acting Mediator (S/1205, 12 January 1949)",
+          "author": "Ralph Bunche, UN Acting Mediator",
+          "publisher": "United Nations (UNISPAL)",
+          "url": "https://www.un.org/unispal/document/auto-insert-210596/",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "start: 'the first stage in the negotiations ... was reached today, 12 January, with the arrival in Rhodes of both the Egyptian and Israeli delegations'; first joint meeting on 13 January",
+          "via": ""
+        },
+        {
+          "id": "p2s2",
+          "title": "1949 Armistice Agreements",
+          "author": "",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/1949_Armistice_Agreements",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "start: talks began on Rhodes on 12 January 1949; agreements signed 24 February, 23 March, 3 April; end: Syria agreement signed 20 July 1949",
+          "via": ""
+        },
+        {
+          "id": "p2s3",
+          "title": "Israeli-Syrian General Armistice Agreement, July 20, 1949",
+          "author": "",
+          "publisher": "Avalon Project, Yale Law School (text of the agreement)",
+          "url": "https://avalon.law.yale.edu/20th_century/arm04.asp",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "end: the last agreement was signed on 20 July 1949",
+          "via": ""
+        },
+        {
+          "id": "p2s4",
+          "title": "Arab-Israeli wars",
+          "author": "The Editors of Encyclopaedia Britannica",
+          "publisher": "Encyclopaedia Britannica",
+          "url": "https://www.britannica.com/event/Arab-Israeli-wars",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "between February and July 1949 separate armistice agreements fixed a temporary frontier between Israel and its neighbours",
+          "via": ""
+        },
+        {
+          "id": "p2s5",
+          "title": "The Arab-Israeli War of 1948 (Milestones: 1945–1952)",
+          "author": "",
+          "publisher": "U.S. Department of State, Office of the Historian (US government)",
+          "url": "https://history.state.gov/milestones/1945-1952/arab-israeli-war",
+          "kind": "organization",
+          "accessed": "2026-11-15",
+          "supports": "fighting continued into 1949 and no formal armistice agreements were reached until February",
+          "via": ""
+        }
+      ]
+    }
+  ]
 }

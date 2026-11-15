@@ -12,7 +12,8 @@ most of the research, coding and repo upkeep.
 - Run `node scripts/validate.mjs` before every commit. It must report 0 errors.
 
 ## Repo
-- GitHub: `HashemW/timelines` (`main`). Claude owns commits/pushes. Keep commits small and descriptive.
+- GitHub: `HashemW/timelines` (`main`, private for now). Claude owns commits/pushes. Keep commits small and descriptive.
+- Remote uses HTTPS (gh is the credential helper). The SSH keys on this machine are rejected by GitHub.
 - The older `HashemW/TimeLine` repo is an abandoned earlier attempt. Leave it alone.
 
 ## Working locally
@@ -23,7 +24,10 @@ most of the research, coding and repo upkeep.
 
 ## Research workflow
 - Wikipedia coordinates: `curl -s -A "timelines-research/0.1" "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&colimit=max&coprimary=primary&redirects=1&format=json&titles=A|B"`
-- Some sites (Britannica, UNRWA) return 403 to WebFetch; try curl with a browser-like user agent, or use another source.
+- Some sites block WebFetch (Britannica, UNRWA, palquest.org, palestine-studies.org, gov.il). Britannica serves curl with an
+  honest user agent (`-A "timelines-research/0.1"`). Never disguise requests as a browser or get around a block; use another source.
+- paljourneys.org (Institute for Palestine Studies) now redirects to palquest.org, which is behind a Cloudflare challenge.
+  For Palestinian perspectives, Zochrot and the UN study "The Origins and Evolution of the Palestine Problem" are readable.
 - When running parallel research agents, don't let them use the Chrome tools at the same time.
 
 ## Topic notes

@@ -73,11 +73,11 @@ Dates are strings in ISO order, as precise as the evidence allows:
 | `id`         | yes | kebab-case, unique within the topic |
 | `title`      | yes | neutral wording |
 | `altNames`   | no  | names used by different sides or languages |
-| `type`       | yes | `battle`, `military-operation`, `siege`, `massacre`, `displacement`, `political`, `diplomatic`, `ceasefire`, `other` (topics like biographies may add their own: `birth`, `death`, `residence`, `journey`, `work`…) |
+| `type`       | yes | `battle`, `military-operation`, `siege`, `massacre`, `attack` (bombings, ambushes), `displacement`, `political`, `diplomatic`, `ceasefire`, `other` (topics like biographies may add their own: `birth`, `death`, `residence`, `journey`, `work`…) |
 | `start`      | yes | see Dates |
 | `end`        | no  | inclusive |
 | `importance` | yes | `1` = a beginner must know it, `2` = important, `3` = detail |
-| `place`      | yes | `precision` is `exact`, `approximate` or `region`; add `note` if the place was renamed or destroyed |
+| `place`      | yes | `precision` is `exact`, `approximate` or `region` (shown as a soft area, not a pin); add `note` if the place was renamed or destroyed |
 | `summary`    | yes | short and plain; no claims that are not backed by `sources` |
 | `parties`    | no  | who was involved |
 | `disputes`   | no  | where sources disagree, each claim attributed to its sources |

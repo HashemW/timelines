@@ -12,13 +12,13 @@ const MON = MONTHS.map((m) => m.slice(0, 3));
 
 const CATEGORY_OF = {
   battle: "military", "military-operation": "military", siege: "military",
-  massacre: "civilian", displacement: "civilian",
+  massacre: "civilian", attack: "civilian", displacement: "civilian",
   political: "political", diplomatic: "political", ceasefire: "political", other: "political",
   birth: "life", death: "life", residence: "life", journey: "life", work: "life",
 };
 const CATEGORIES = {
   military:  { label: "Military", color: "#b03a2e" },
-  civilian:  { label: "Massacres & displacement", color: "#6a3d9a" },
+  civilian:  { label: "Massacres, attacks & displacement", color: "#6a3d9a" },
   political: { label: "Political & diplomatic", color: "#2a6f97" },
   life:      { label: "Life events", color: "#3c7a4a" },
 };
@@ -211,6 +211,14 @@ function addEventLayers() {
   const size = ["match", ["get", "importance"], 1, 8, 2, 6.5, 5];
   const active = ["in", ["get", "status"], ["literal", ["now", "recent"]]];
 
+  // Region-wide events (precision "region") get a soft area instead of looking like a pinpoint.
+  map.addLayer({
+    id: "ev-zone", type: "circle", source: "events", filter: ["all", active, ["==", ["get", "region"], true]],
+    paint: {
+      "circle-radius": 48, "circle-color": color, "circle-opacity": 0.07,
+      "circle-stroke-color": color, "circle-stroke-width": 1.2, "circle-stroke-opacity": 0.45,
+    },
+  });
   map.addLayer({
     id: "ev-past", type: "circle", source: "events", filter: ["==", ["get", "status"], "past"],
     paint: { "circle-radius": 3.5, "circle-color": color, "circle-opacity": 0.4, "circle-stroke-color": "#fff", "circle-stroke-width": 0.6, "circle-stroke-opacity": 0.6 },
@@ -263,7 +271,10 @@ function eventFeatures() {
       .filter(({ status }) => status !== "future")
       .map(({ ev, status }) => ({
         type: "Feature",
-        properties: { id: ev.id, title: ev.title, category: ev.category, importance: ev.importance, status },
+        properties: {
+          id: ev.id, title: ev.title, category: ev.category, importance: ev.importance, status,
+          region: ev.place.precision === "region",
+        },
         geometry: { type: "Point", coordinates: [ev.place.lon, ev.place.lat] },
       })),
   };
@@ -465,7 +476,8 @@ function render() {
   const day = state.day;
   $("slider").value = day;
   $("now-date").textContent = fmtDay(day);
-  const phase = state.phases.find((ph) => day >= ph.s && day <= ph.e);
+  // Phases can share a boundary day (a truce starts the day the fighting phase ends): the newer one wins.
+  const phase = state.phases.filter((ph) => day >= ph.s && day <= ph.e).at(-1);
   $("now-phase").innerHTML = phase ? `<span class="phase-dot" style="background:${phase.color}"></span>${esc(phase.title)}` : "&nbsp;";
   $("prev").disabled = !state.events.some((ev) => ev.s < day);
   $("next").disabled = !state.events.some((ev) => ev.s > day);

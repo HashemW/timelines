@@ -15,7 +15,7 @@ const warn = (where, msg) => { warnings++; console.log(`warn   ${where}: ${msg}`
 
 const DATE = /^\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?)?$/;
 const ID = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const TYPES = new Set(["battle", "military-operation", "siege", "massacre", "displacement", "political",
+const TYPES = new Set(["battle", "military-operation", "siege", "massacre", "attack", "displacement", "political",
   "diplomatic", "ceasefire", "other", "birth", "death", "residence", "journey", "work"]);
 const KINDS = new Set(["primary", "scholarly", "reference", "organization", "journalism"]);
 const PRECISION = new Set(["exact", "approximate", "region"]);
