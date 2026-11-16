@@ -3,3 +3,5 @@ node_modules/
 Thumbs.db
 *.log
 .claude/settings.local.json
+scripts/partition-1947/work/
+__pycache__/

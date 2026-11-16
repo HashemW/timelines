@@ -1,0 +1,5 @@
+# The versions that produced the committed GeoJSON. Others will probably work, but may move points slightly.
+numpy==2.2.5
+opencv-python==4.11.0.86
+scipy==1.15.2
+pillow==11.2.1

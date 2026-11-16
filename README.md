@@ -39,6 +39,7 @@ data/topics/<id>/           one folder per topic: topic.json, events.json, place
 docs/data-format.md         what goes in each file
 docs/sourcing.md            the rules every piece of data follows
 scripts/validate.mjs        checks the data: run `node scripts/validate.mjs`
+scripts/partition-1947/     how the 1947 UN partition plan layer was traced from the UN's map (Python)
 ```
 
 ## Controls
