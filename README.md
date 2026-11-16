@@ -40,6 +40,7 @@ docs/data-format.md         what goes in each file
 docs/sourcing.md            the rules every piece of data follows
 scripts/validate.mjs        checks the data: run `node scripts/validate.mjs`
 scripts/partition-1947/     how the 1947 UN partition plan layer was traced from the UN's map (Python)
+scripts/areas-held-1948/    how the "who held what" layer was built (Python)
 ```
 
 ## Controls
@@ -58,5 +59,8 @@ Historical borders (1948 topic): [OpenHistoricalMap](https://www.openhistoricalm
 and marked as draft until they've been checked against the original maps. The 1947 UN partition plan was traced
 for this site from the UN's own map of the plan (Map No. 103, November 1947, in the
 [UN Digital Library](https://digitallibrary.un.org/record/409073)) and checked against the text of Resolution 181.
+"Who held what" (1948–1949) is an approximation built from declassified CIA maps of the military situation
+(11 June and 18 July 1948), the 1949 armistice lines, and the dates of the main operations, with West Point
+history maps as a guide.
 The base map deliberately shows no modern borders, roads or city names. Labels come from each
 topic's own period data.

@@ -9,6 +9,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import EXTRACT, MANDATE, OUTPUT
 
 e = json.load(open(EXTRACT))
+AREAS_END = "1948-06-10"           # the day before the first truce
 KX, KY = 111.32 * np.cos(np.radians(31.5)), 110.57          # km per degree, near enough for distances here
 
 segs = []
@@ -61,9 +62,10 @@ fc = {"type": "FeatureCollection", "features": [
      "geometry": {"type": "MultiLineString", "coordinates": lines}},
     {"type": "Feature", "properties": {"name": "Boundary of the City of Jerusalem (proposed international zone)"},
      "geometry": {"type": "LineString", "coordinates": e["ajl"][0]}},
-    {"type": "Feature", "properties": {"name": "Arab State (proposed)", "fill": "#d9822b", "fill-opacity": 0.2}, "geometry": mp(e["pa"])},
-    {"type": "Feature", "properties": {"name": "Jewish State (proposed)", "fill": "#2a9d8f", "fill-opacity": 0.2}, "geometry": mp(e["pj"])},
-    {"type": "Feature", "properties": {"name": "City of Jerusalem (proposed international zone)", "fill": "#fffaf0", "fill-opacity": 0.55}, "geometry": mp(e["pjl"])},
+    # the shading gives way to the 'areas held' layer at the first truce; the boundary lines stay for the whole war
+    {"type": "Feature", "properties": {"name": "Arab State (proposed)", "end": AREAS_END, "fill": "#d9822b", "fill-opacity": 0.2}, "geometry": mp(e["pa"])},
+    {"type": "Feature", "properties": {"name": "Jewish State (proposed)", "end": AREAS_END, "fill": "#2a9d8f", "fill-opacity": 0.2}, "geometry": mp(e["pj"])},
+    {"type": "Feature", "properties": {"name": "City of Jerusalem (proposed international zone)", "end": AREAS_END, "fill": "#fffaf0", "fill-opacity": 0.55}, "geometry": mp(e["pjl"])},
 ]}
 out = sys.argv[1] if len(sys.argv) > 1 else OUTPUT
 s = json.dumps(fc, separators=(",", ":"))

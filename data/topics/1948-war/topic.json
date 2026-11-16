@@ -372,7 +372,7 @@
       "end": "1949-07-20",
       "on": true,
       "status": "draft",
-      "note": "The plan the UN General Assembly adopted on 29 November 1947: an Arab state and a Jewish state, each in three parts that meet at two crossing points, an Arab enclave at Jaffa, and Jerusalem with Bethlehem as an international zone run by the UN. It was never carried out. It is shown for the whole war so it can be compared with what followed. Traced for this site by Claude (an AI) from the UN's own map of the plan (Map No. 103, November 1947), fitted to real coordinates using the map's printed latitude and longitude lines, and checked against the boundary description in the resolution. That map is small-scale (about 1:1,000,000) and its boundary lines are printed several hundred metres wide, so expect errors of a few hundred metres, up to about a kilometre in places. For example, the text puts Motza inside the Jerusalem zone, but the traced line leaves it about 700 m outside, and Qalqilya, which the text leaves in the Arab state, falls a few hundred metres on the Jewish side. The short stretch across the Dead Sea east of Ein Gedi is not drawn on the map; it follows the text (\"due east to join the Transjordan frontier\").",
+      "note": "The plan the UN General Assembly adopted on 29 November 1947: an Arab state and a Jewish state, each in three parts that meet at two crossing points, an Arab enclave at Jaffa, and Jerusalem with Bethlehem as an international zone run by the UN. It was never carried out. Its shading is shown until the first truce (11 June 1948), when the “Who held what” layer takes over; its boundary lines stay on the map for the whole war so the plan can be compared with what followed. Traced for this site by Claude (an AI) from the UN's own map of the plan (Map No. 103, November 1947), fitted to real coordinates using the map's printed latitude and longitude lines, and checked against the boundary description in the resolution. That map is small-scale (about 1:1,000,000) and its boundary lines are printed several hundred metres wide, so expect errors of a few hundred metres, up to about a kilometre in places. For example, the text puts Motza inside the Jerusalem zone, but the traced line leaves it about 700 m outside, and Qalqilya, which the text leaves in the Arab state, falls a few hundred metres on the Jewish side. The short stretch across the Dead Sea east of Ein Gedi is not drawn on the map; it follows the text (\"due east to join the Transjordan frontier\").",
       "legend": [
         {
           "text": "Arab state",
@@ -392,31 +392,31 @@
           "text": "Arab state (UN plan)",
           "lat": 32.1,
           "lon": 35.42,
-          "end": "1949-02-23"
+          "end": "1948-06-10"
         },
         {
           "text": "Arab state (UN plan)",
           "lat": 30.85,
           "lon": 34.5,
-          "end": "1949-02-23"
+          "end": "1948-06-10"
         },
         {
           "text": "Jewish state (UN plan)",
           "lat": 32.57,
           "lon": 35.47,
-          "end": "1949-02-23"
+          "end": "1948-06-10"
         },
         {
           "text": "Jewish state (UN plan)",
           "lat": 30.3,
           "lon": 34.97,
-          "end": "1949-02-23"
+          "end": "1948-06-10"
         },
         {
           "text": "International zone (UN plan)",
           "lat": 31.69,
           "lon": 35.21,
-          "end": "1949-02-23"
+          "end": "1948-06-10"
         }
       ],
       "sources": [
@@ -450,6 +450,159 @@
           "kind": "reference",
           "accessed": "2026-11-15",
           "supports": "three line ends that stop at a land frontier (Lebanon, the Jordan, Egypt) were joined to this boundary, across gaps of 0.3–0.9 km, so they meet the Mandate boundary shown on the map"
+        }
+      ]
+    },
+    {
+      "id": "areas-held-1948-1949",
+      "title": "Who held what (approximate)",
+      "file": "borders/areas-held-1948-1949.geojson",
+      "style": "front",
+      "start": "1948-06-11",
+      "end": "1949-07-20",
+      "on": true,
+      "status": "draft",
+      "note": "Roughly who held the ground at each stage of the war, so you can watch the front lines move. The map changes in steps, on the dates the main operations ended, not day by day. The first stages are traced from declassified CIA maps of the military situation on 11 June 1948 (the first truce) and 18 July 1948 (the second truce). For western Galilee we follow the July map, which puts its hills on the Arab side during the first truce, although the June map calls them “Jewish controlled”. The end state is the Israeli side of the 1949 armistice lines. The steps in between are our own estimate: the ground that changed hands after July is split into pieces, each dated by the operation that took it (see this topic’s events, and the sources below for Ha-Har, Beit Jibrin, al-Dawayima and Majdal). The Triangle villages are shown passing to Israel on the date of the armistice with Transjordan (3 April 1949), which moved them to Israel’s side; they were handed over in the weeks after. The pieces’ edges are rough, and the southern Negev is left unshaded until March 1949 because neither side held that largely empty desert. Expect errors of a kilometre or more. Ground Israeli forces held outside the former Mandate, in Lebanon (October 1948 to March 1949) and Sinai (December 1948 to January 1949), is not shown.",
+      "legend": [
+        {
+          "text": "Held by Israeli forces",
+          "color": "#2a9d8f"
+        },
+        {
+          "text": "Held by Arab forces",
+          "color": "#d9822b"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Arab Liberation Army",
+          "lat": 33.04,
+          "lon": 35.27,
+          "start": "1948-06-11",
+          "end": "1948-10-30"
+        },
+        {
+          "text": "Iraqi Army",
+          "lat": 32.36,
+          "lon": 35.18,
+          "start": "1948-06-11",
+          "end": "1949-04-02"
+        },
+        {
+          "text": "Arab Legion (Transjordan)",
+          "lat": 31.93,
+          "lon": 35.3,
+          "start": "1948-06-11",
+          "end": "1949-04-02"
+        },
+        {
+          "text": "Egyptian Army",
+          "lat": 31.4,
+          "lon": 34.42,
+          "start": "1948-06-11",
+          "end": "1949-02-23"
+        },
+        {
+          "text": "Egyptian Army",
+          "lat": 31.58,
+          "lon": 34.86,
+          "start": "1948-06-11",
+          "end": "1948-10-20"
+        },
+        {
+          "text": "Faluja pocket (Egyptian Army)",
+          "lat": 31.625,
+          "lon": 34.76,
+          "start": "1948-10-21",
+          "end": "1949-02-25"
+        }
+      ],
+      "sources": [
+        {
+          "id": "cia-1948-06-11",
+          "title": "Military Situation – 11 June 1948 (On effective date of U.N. cease-fire order), Palestine",
+          "author": "Central Intelligence Agency, Map Branch (map 11010, June 1948; declassified)",
+          "publisher": "Harry S. Truman Library; scan on Wikimedia Commons (US government work, public domain)",
+          "url": "https://commons.wikimedia.org/wiki/File:Palestine_Military_Situation,_June_11,_1948,_Truman_Papers.jpg",
+          "kind": "primary",
+          "accessed": "2026-11-16",
+          "supports": "the 11 June 1948 snapshot: its ‘Jewish held area’ and ‘Jewish controlled area’ (except western Galilee, see the July map), read off the scan and fitted to coordinates with the map’s printed graticule; it labels the rest ‘Arab held’ and ‘Arab controlled’"
+        },
+        {
+          "id": "cia-1948-07-18",
+          "title": "Military Situation – 18 July 1948 (At beginning of second U.N. truce)",
+          "author": "Central Intelligence Agency, Map Branch (declassified)",
+          "publisher": "Jewish Virtual Library (American-Israeli Cooperative Enterprise), which hosts the scan and credits the CIA",
+          "url": "https://www.jewishvirtuallibrary.org/1948-war-military-situation-at-beginning-of-second-truce",
+          "kind": "primary",
+          "accessed": "2026-11-16",
+          "supports": "the July 1948 steps: the hatched ‘Jewish gains between 1st and 2nd truces’ (Lower Galilee and Nazareth, Lydda and Ramle, a block south-west of the Jerusalem corridor); the first-truce line in western Galilee, with the hills marked ‘Arab (control in doubt)’ and the coast north of Acre on the Jewish side"
+        },
+        {
+          "id": "cia-1949-04-06",
+          "title": "Palestine: Military Situation, 6 April 1949",
+          "author": "US government (declassified)",
+          "publisher": "Harry S. Truman Library; scan on Wikimedia Commons (public domain)",
+          "url": "https://commons.wikimedia.org/wiki/File:Palestine_Military_Situation,_April_6,_1949,_Truman_Papers.jpg",
+          "kind": "primary",
+          "accessed": "2026-11-16",
+          "supports": "compared by eye with the end state: by April 1949 the whole Negev was under Israeli control; ‘Iraqi forces’ in the Triangle, ‘Arab Legion’ around Ramallah, Jerusalem and Hebron, Egyptian forces in the Gaza Strip"
+        },
+        {
+          "id": "usma-1948-10",
+          "title": "Israel, War of Independence: October 1948 Battles (map 37)",
+          "author": "Department of History, U.S. Military Academy (West Point)",
+          "publisher": "Wikimedia Commons (US government work, public domain)",
+          "url": "https://commons.wikimedia.org/wiki/File:1948_arab_israeli_war_-_Oct.jpg",
+          "kind": "reference",
+          "accessed": "2026-11-16",
+          "supports": "a guide for the October 1948 pieces: the Arab Liberation Army’s area in central Galilee before Operation Hiram, the areas of the Israeli attacks of 15–21 October in the south, and the demarcation line at the beginning of October"
+        },
+        {
+          "id": "usma-1948-12",
+          "title": "Sinai, War of Independence: Operation AYIN, 22 December 1948 – 7 January 1949 (map 38)",
+          "author": "Department of History, U.S. Military Academy (West Point)",
+          "publisher": "Wikimedia Commons (US government work, public domain)",
+          "url": "https://commons.wikimedia.org/wiki/File:1948_arab_israeli_war_-_Dec22-Jan07.jpg",
+          "kind": "reference",
+          "accessed": "2026-11-16",
+          "supports": "a guide for the western Negev piece (Auja and the Egyptian positions taken in Operation Horev) and the Faluja pocket"
+        },
+        {
+          "id": "wp-yoav",
+          "title": "Operation Yoav",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Operation_Yoav",
+          "kind": "reference",
+          "accessed": "2026-11-16",
+          "supports": "dates: Operation Yoav 15–22 October 1948; Beersheba taken on 21 October; Beit Jibrin on 23 October; the al-Dawayima massacre on 29 October"
+        },
+        {
+          "id": "wp-hahar",
+          "title": "Operation HaHar",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Operation_HaHar",
+          "kind": "reference",
+          "accessed": "2026-11-16",
+          "supports": "dates: Operation Ha-Har against villages south-west of Jerusalem, 19–24 October 1948"
+        },
+        {
+          "id": "wp-ashkelon",
+          "title": "Ashkelon (history of al-Majdal)",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ashkelon",
+          "kind": "reference",
+          "accessed": "2026-11-16",
+          "supports": "al-Majdal was taken by Israeli forces on 5 November 1948 (the article also gives 4 November); we use 5 November for the coast between Isdud and Majdal"
+        },
+        {
+          "id": "ohm-2864015",
+          "title": "Israel, 1949–1967 (OpenHistoricalMap relation 2864015)",
+          "publisher": "OpenHistoricalMap (community-edited historical map database; data released under CC0)",
+          "url": "https://www.openhistoricalmap.org/relation/2864015",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "the end state: the Israeli side of the 1949 armistice lines (the same lines as the armistice layer)"
         }
       ]
     },
