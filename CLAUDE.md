@@ -12,7 +12,8 @@ most of the research, coding and repo upkeep.
 - Run `node scripts/validate.mjs` before every commit. It must report 0 errors.
 
 ## Repo
-- GitHub: `HashemW/timelines` (`main`, private for now). Claude owns commits/pushes. Keep commits small and descriptive.
+- GitHub: `HashemW/timelines` (`main`, public). Live on GitHub Pages at https://hashemw.github.io/timelines/ (served
+  from `main`). Claude owns commits/pushes. Keep commits small and descriptive.
 - Remote uses HTTPS (gh is the credential helper). The SSH keys on this machine are rejected by GitHub.
 - The older `HashemW/TimeLine` repo is an abandoned earlier attempt. Leave it alone.
 
