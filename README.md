@@ -54,6 +54,8 @@ Base map: [OpenFreeMap](https://openfreemap.org) / © [OpenStreetMap](https://ww
 Relief: [Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) (Mapzen, on AWS Open Data).
 Map rendering: [MapLibre GL JS](https://maplibre.org).
 Historical borders (1948 topic): [OpenHistoricalMap](https://www.openhistoricalmap.org) (CC0), community-traced
-and marked as draft until they've been checked against the original maps.
+and marked as draft until they've been checked against the original maps. The 1947 UN partition plan was traced
+for this site from the UN's own map of the plan (Map No. 103, November 1947, in the
+[UN Digital Library](https://digitallibrary.un.org/record/409073)) and checked against the text of Resolution 181.
 The base map deliberately shows no modern borders, roads or city names. Labels come from each
 topic's own period data.

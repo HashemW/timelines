@@ -19,6 +19,7 @@ const TYPES = new Set(["battle", "military-operation", "siege", "massacre", "att
   "diplomatic", "ceasefire", "other", "birth", "death", "residence", "journey", "work"]);
 const KINDS = new Set(["primary", "scholarly", "reference", "organization", "journalism"]);
 const PRECISION = new Set(["exact", "approximate", "region"]);
+const COLOR = /^#[0-9a-f]{6}$/i;
 
 function dayOf(iso, edge) {
   const [y, m, d] = iso.split("-").map(Number);
@@ -85,8 +86,14 @@ for (const t of topics) {
     if (!l.title) err(w, "missing title");
     if (!l.file || !exists(`${dir}${l.file}`)) err(w, `file "${l.file}" not found`);
     else {
-      try { const g = read(`${dir}${l.file}`); if (g.type !== "FeatureCollection") err(w, "file must be a GeoJSON FeatureCollection"); }
-      catch { err(w, "file is not valid JSON"); }
+      try {
+        const g = read(`${dir}${l.file}`);
+        if (g.type !== "FeatureCollection") err(w, "file must be a GeoJSON FeatureCollection");
+        for (const f of g.features || []) {
+          const area = /Polygon$/.test(f.geometry?.type || "");
+          if (area && !COLOR.test(f.properties?.fill || "")) err(w, `area "${f.properties?.name ?? "?"}" needs a "fill" colour like "#d9822b"`);
+        }
+      } catch { err(w, "file is not valid JSON"); }
     }
     if (!STYLES.has(l.style)) err(w, `style must be one of ${[...STYLES].join(", ")}`);
     checkDate(w, "start", l.start, true);
@@ -96,6 +103,10 @@ for (const t of topics) {
     for (const lb of l.labels || []) {
       if (!lb.text || typeof lb.lat !== "number" || typeof lb.lon !== "number") err(w, "each label needs text, lat and lon");
       if (lb.start) checkDate(w, "label start", lb.start, true);
+      if (lb.end) checkDate(w, "label end", lb.end, true);
+    }
+    for (const k of l.legend || []) {
+      if (!k.text || !COLOR.test(k.color || "")) err(w, "each legend entry needs text and a colour like \"#d9822b\"");
     }
     if (!["draft", "reviewed"].includes(l.status)) err(w, `status must be "draft" or "reviewed"`);
   }

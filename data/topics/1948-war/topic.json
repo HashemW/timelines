@@ -364,6 +364,96 @@
       ]
     },
     {
+      "id": "partition-plan-1947",
+      "title": "UN partition plan (Resolution 181)",
+      "file": "borders/partition-plan-1947.geojson",
+      "style": "plan",
+      "start": "1947-11-29",
+      "end": "1949-07-20",
+      "on": true,
+      "status": "draft",
+      "note": "The plan the UN General Assembly adopted on 29 November 1947: an Arab state and a Jewish state, each in three parts that meet at two crossing points, an Arab enclave at Jaffa, and Jerusalem with Bethlehem as an international zone run by the UN. It was never carried out. It is shown for the whole war so it can be compared with what followed. Traced for this site by Claude (an AI) from the UN's own map of the plan (Map No. 103, November 1947), fitted to real coordinates using the map's printed latitude and longitude lines, and checked against the boundary description in the resolution. That map is small-scale (about 1:1,000,000) and its boundary lines are printed several hundred metres wide, so expect errors of a few hundred metres, up to about a kilometre in places. For example, the text puts Motza inside the Jerusalem zone, but the traced line leaves it about 700 m outside, and Qalqilya, which the text leaves in the Arab state, falls a few hundred metres on the Jewish side. The short stretch across the Dead Sea east of Ein Gedi is not drawn on the map; it follows the text (\"due east to join the Transjordan frontier\").",
+      "legend": [
+        {
+          "text": "Arab state",
+          "color": "#d9822b"
+        },
+        {
+          "text": "Jewish state",
+          "color": "#2a9d8f"
+        },
+        {
+          "text": "Jerusalem: international zone",
+          "color": "#fffaf0"
+        }
+      ],
+      "labels": [
+        {
+          "text": "Arab state (UN plan)",
+          "lat": 32.1,
+          "lon": 35.42,
+          "end": "1949-02-23"
+        },
+        {
+          "text": "Arab state (UN plan)",
+          "lat": 30.85,
+          "lon": 34.5,
+          "end": "1949-02-23"
+        },
+        {
+          "text": "Jewish state (UN plan)",
+          "lat": 32.57,
+          "lon": 35.47,
+          "end": "1949-02-23"
+        },
+        {
+          "text": "Jewish state (UN plan)",
+          "lat": 30.3,
+          "lon": 34.97,
+          "end": "1949-02-23"
+        },
+        {
+          "text": "International zone (UN plan)",
+          "lat": 31.69,
+          "lon": 35.21,
+          "end": "1949-02-23"
+        }
+      ],
+      "sources": [
+        {
+          "id": "un-map-103",
+          "title": "Palestine: plan of partition with Economic Union proposed by the Ad Hoc Committee on the Palestinian Question (UN Map No. 103, November 1947)",
+          "author": "United Nations",
+          "publisher": "United Nations, UN Digital Library (scan of the UN Library's file copy)",
+          "url": "https://digitallibrary.un.org/record/409073",
+          "kind": "primary",
+          "accessed": "2026-11-15",
+          "supports": "the geometry: traced from the record's high-resolution scan (103_1.tif). The map is marked 'A/516 Annex A' (the Ad Hoc Committee's report) and shows the Arab State, the Jewish State and the City of Jerusalem",
+          "via": ""
+        },
+        {
+          "id": "res-181-text",
+          "title": "UN General Assembly Resolution 181 (II), Future Government of Palestine, 29 November 1947 (Part II: Boundaries; Part III B: Boundaries of the City)",
+          "author": "UN General Assembly",
+          "publisher": "Yale Law School, Avalon Project (text of the resolution)",
+          "url": "https://avalon.law.yale.edu/20th_century/res181.asp",
+          "kind": "primary",
+          "accessed": "2026-11-16",
+          "supports": "the written boundary description, used to check the traced lines (Saliha on the Lebanese frontier, Wadi Malih on the Jordan, the two points of intersection, the sea between Nabi Yunis and Minat el-Qila, Wadi Lassan on the Egyptian frontier, the Jaffa enclave, the City of Jerusalem from 'Ein Karim and Motsa to Abu Dis, Bethlehem and Shu'fat, under UN administration); the only source for the stretch across the Dead Sea",
+          "via": "UN document A/RES/181 (II)"
+        },
+        {
+          "id": "ohm-2848316",
+          "title": "Palestine Mandate, 1920–1948 (OpenHistoricalMap relation 2848316)",
+          "publisher": "OpenHistoricalMap (community-edited historical map database; data released under CC0)",
+          "url": "https://www.openhistoricalmap.org/relation/2848316",
+          "kind": "reference",
+          "accessed": "2026-11-15",
+          "supports": "three line ends that stop at a land frontier (Lebanon, the Jordan, Egypt) were joined to this boundary, across gaps of 0.3–0.9 km, so they meet the Mandate boundary shown on the map"
+        }
+      ]
+    },
+    {
       "id": "armistice-1949",
       "title": "1949 armistice lines",
       "file": "borders/armistice-lines-1949.geojson",

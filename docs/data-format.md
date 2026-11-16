@@ -138,6 +138,13 @@ file in the topic folder, listed in `topic.json` under `layers`:
 
 - The layer is drawn only while the slider is between `start` and `end`. Readers can switch it off.
 - `style`: `reference` (dashed grey frame), `armistice` (solid green), `zone` (dashed green),
-  `plan` (dotted, for proposals that were never in force, like a partition plan).
+  `plan` (dotted, for proposals that were never in force, like a partition plan). Labels take
+  the style's colour. A label can have its own `start` and `end` inside the layer's range.
+- Lines (`LineString`, `MultiLineString`) are drawn in the layer's style. Areas (`Polygon`,
+  `MultiPolygon`) are shaded with the feature's own `fill` colour and `fill-opacity` (default
+  0.2), the same property names GitHub's map preview uses. Areas sit under the water, so the
+  modern coastline trims them; it is fine for an area to run a little out to sea.
+- `legend` (optional) explains the shading in the layer list:
+  `[{ "text": "Arab state", "color": "#d9822b" }]`, one entry per fill colour.
 - Geometry needs sources like everything else. Say in `note` who traced it, from what, and how
   far it has been checked.

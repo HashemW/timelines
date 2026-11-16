@@ -30,6 +30,9 @@ const LAYER_STYLES = {
   zone:      { "line-color": "#2e7d32", "line-width": 1.4, "line-opacity": 0.9, "line-dasharray": [2, 1.5] },
   plan:      { "line-color": "#a0522d", "line-width": 1.8, "line-opacity": 0.85, "line-dasharray": [1, 1.5] },
 };
+const LABEL_COLORS = { reference: "#5c5346", armistice: "#2e6b32", zone: "#2e6b32", plan: "#8a4524" };
+const LINES = ["match", ["geometry-type"], ["LineString", "MultiLineString"], true, false];
+const AREAS = ["match", ["geometry-type"], ["Polygon", "MultiPolygon"], true, false];
 
 /* ---------- dates ----------
  * Data uses partial ISO strings ("1948", "1948-07", "1948-07-12").
@@ -180,15 +183,24 @@ function applyPadding() {
 function addBorderLayers() {
   for (const l of state.layers) {
     map.addSource(`layer-${l.id}`, { type: "geojson", data: l.url });
+    // Areas (polygons with a `fill` colour) sit under the water, so the modern coastline trims them.
     map.addLayer({
-      id: `layer-${l.id}`, type: "line", source: `layer-${l.id}`,
+      id: `layer-${l.id}-fill`, type: "fill", source: `layer-${l.id}`, filter: AREAS,
+      layout: { visibility: "none" },
+      paint: { "fill-color": ["coalesce", ["get", "fill"], "#888888"], "fill-opacity": ["coalesce", ["get", "fill-opacity"], 0.2] },
+    }, "water");
+    map.addLayer({
+      id: `layer-${l.id}`, type: "line", source: `layer-${l.id}`, filter: LINES,
       layout: { "line-join": "round", "line-cap": "round", visibility: "none" },
       paint: LAYER_STYLES[l.style] || LAYER_STYLES.reference,
     });
   }
   const labels = state.layers.flatMap((l) => (l.labels || []).map((lb) => ({
     type: "Feature",
-    properties: { text: lb.text, layer: l.id, s: toDay(lb.start || l.start, "start"), e: toDay(lb.end || l.end, "end") },
+    properties: {
+      text: lb.text, layer: l.id, color: LABEL_COLORS[l.style] || LABEL_COLORS.reference,
+      s: toDay(lb.start || l.start, "start"), e: toDay(lb.end || l.end, "end"),
+    },
     geometry: { type: "Point", coordinates: [lb.lon, lb.lat] },
   })));
   map.addSource("layer-labels", { type: "geojson", data: { type: "FeatureCollection", features: labels } });
@@ -198,7 +210,7 @@ function addBorderLayers() {
       "text-field": ["get", "text"], "text-font": ["Noto Sans Italic"], "text-size": 12, "text-max-width": 9,
       "text-allow-overlap": true,
     },
-    paint: { "text-color": "#2e6b32", "text-halo-color": "rgba(251,248,241,.85)", "text-halo-width": 1.4 },
+    paint: { "text-color": ["get", "color"], "text-halo-color": "rgba(251,248,241,.85)", "text-halo-width": 1.4 },
   });
 }
 
@@ -206,8 +218,9 @@ function updateBorderLayers() {
   if (!map?.getLayer("layer-labels")) return;
   const day = state.day;
   for (const l of state.layers) {
-    const visible = l.on && day >= l.s && day <= l.e;
-    map.setLayoutProperty(`layer-${l.id}`, "visibility", visible ? "visible" : "none");
+    const visible = l.on && day >= l.s && day <= l.e ? "visible" : "none";
+    map.setLayoutProperty(`layer-${l.id}`, "visibility", visible);
+    map.setLayoutProperty(`layer-${l.id}-fill`, "visibility", visible);
   }
   const on = state.layers.filter((l) => l.on).map((l) => l.id);
   map.setFilter("layer-labels", ["all",
@@ -221,7 +234,8 @@ function layersHTML() {
     return `<label class="layer"><input type="checkbox" data-layer="${esc(l.id)}"${l.on ? " checked" : ""}>
       <span class="swatch ${esc(l.style)}"></span>
       <span><span class="item-title">${esc(l.title)}</span>
-      <span class="item-meta">${esc(fmtRange(l.start, l.end))}${inRange ? "" : " · not on the map at this date"}</span></span></label>
+      <span class="item-meta">${esc(fmtRange(l.start, l.end))}${inRange ? "" : " · not on the map at this date"}</span>
+      ${(l.legend || []).map((k) => `<span class="key"><span class="chip" style="background:${esc(k.color)}"></span>${esc(k.text)}</span>`).join("")}</span></label>
       <details class="layer-about"${state.openLayerInfo === l.id ? " open" : ""} data-layer-info="${esc(l.id)}"><summary>About this layer</summary>
       <p>${esc(l.note || "")}</p><ol class="sources">${(l.sources || []).map((s) => sourceHTML(s, `layer-${l.id}`)).join("")}</ol>
       ${l.status !== "reviewed" ? `<p class="draft">Draft: not yet checked by a person.</p>` : ""}</details>`;
