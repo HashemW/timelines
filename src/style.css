@@ -82,6 +82,7 @@ button { font: inherit; color: inherit; }
 .swatch.armistice { border-top: 3px solid #2e7d32; }
 .swatch.zone { border-top: 2px dashed #2e7d32; }
 .swatch.plan { border-top: 2px dotted #a0522d; }
+.swatch.front { border-top: 2px solid #4a3b2f; }
 .key { display: inline-flex; align-items: center; gap: 5px; margin: 3px 12px 0 0; font-size: 12px; color: var(--muted); }
 .key .chip { flex: none; width: 11px; height: 11px; border-radius: 2px; border: 1px solid rgba(0,0,0,.18); opacity: .6; }
 .layer-about { margin: 0 0 4px 50px; }

@@ -29,8 +29,9 @@ const LAYER_STYLES = {
   armistice: { "line-color": "#2e7d32", "line-width": 2.4, "line-opacity": 0.9 },
   zone:      { "line-color": "#2e7d32", "line-width": 1.4, "line-opacity": 0.9, "line-dasharray": [2, 1.5] },
   plan:      { "line-color": "#a0522d", "line-width": 1.8, "line-opacity": 0.85, "line-dasharray": [1, 1.5] },
+  front:     { "line-color": "#4a3b2f", "line-width": 1.6, "line-opacity": 0.85 },
 };
-const LABEL_COLORS = { reference: "#5c5346", armistice: "#2e6b32", zone: "#2e6b32", plan: "#8a4524" };
+const LABEL_COLORS = { reference: "#5c5346", armistice: "#2e6b32", zone: "#2e6b32", plan: "#8a4524", front: "#4a3b2f" };
 const LINES = ["match", ["geometry-type"], ["LineString", "MultiLineString"], true, false];
 const AREAS = ["match", ["geometry-type"], ["Polygon", "MultiPolygon"], true, false];
 
@@ -182,7 +183,7 @@ function applyPadding() {
 
 function addBorderLayers() {
   for (const l of state.layers) {
-    map.addSource(`layer-${l.id}`, { type: "geojson", data: l.url });
+    map.addSource(`layer-${l.id}`, { type: "geojson", data: l.data });
     // Areas (polygons with a `fill` colour) sit under the water, so the modern coastline trims them.
     map.addLayer({
       id: `layer-${l.id}-fill`, type: "fill", source: `layer-${l.id}`, filter: AREAS,
@@ -219,8 +220,13 @@ function updateBorderLayers() {
   const day = state.day;
   for (const l of state.layers) {
     const visible = l.on && day >= l.s && day <= l.e ? "visible" : "none";
+    const now = ["all", ["<=", ["get", "_s"], day], [">=", ["get", "_e"], day]];
     map.setLayoutProperty(`layer-${l.id}`, "visibility", visible);
     map.setLayoutProperty(`layer-${l.id}-fill`, "visibility", visible);
+    if (visible === "visible") {
+      map.setFilter(`layer-${l.id}`, ["all", LINES, now]);
+      map.setFilter(`layer-${l.id}-fill`, ["all", AREAS, now]);
+    }
   }
   const on = state.layers.filter((l) => l.on).map((l) => l.id);
   map.setFilter("layer-labels", ["all",
@@ -650,9 +656,16 @@ async function main() {
         category: CATEGORY_OF[ev.type] || "political",
       }))
       .sort((a, b) => a.s - b.s || a.importance - b.importance);
-    state.layers = (topic.layers || []).map((l) => ({
-      ...l, url: `${base}${l.file}`, on: l.on !== false,
-      s: toDay(l.start, "start"), e: toDay(l.end, "end"),
+    state.layers = await Promise.all((topic.layers || []).map(async (l) => {
+      const layer = { ...l, on: l.on !== false, s: toDay(l.start, "start"), e: toDay(l.end, "end") };
+      // A feature can carry its own "start"/"end" inside the layer's range (e.g. one shape per stage of a war).
+      const data = await getJSON(`${base}${l.file}`);
+      for (const f of data.features) {
+        const p = (f.properties ||= {});
+        p._s = toDay(p.start || l.start, "start");
+        p._e = toDay(p.end || l.end, "end");
+      }
+      return { ...layer, data };
     }));
     state.phases = (topic.phases || []).map((ph, i) => ({
       ...ph, s: toDay(ph.start, "start"), e: toDay(ph.end, "end"), color: PHASE_COLORS[i % PHASE_COLORS.length],

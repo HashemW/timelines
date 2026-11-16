@@ -79,7 +79,7 @@ for (const t of topics) {
     checkSources(w, ph.sources);
   }
 
-  const STYLES = new Set(["reference", "armistice", "zone", "plan"]);
+  const STYLES = new Set(["reference", "armistice", "zone", "plan", "front"]);
   for (const l of topic.layers || []) {
     const w = `${t.id} layer "${l.id}"`;
     if (!l.id || !ID.test(l.id)) err(w, "layer needs a kebab-case id");
@@ -90,8 +90,12 @@ for (const t of topics) {
         const g = read(`${dir}${l.file}`);
         if (g.type !== "FeatureCollection") err(w, "file must be a GeoJSON FeatureCollection");
         for (const f of g.features || []) {
-          const area = /Polygon$/.test(f.geometry?.type || "");
-          if (area && !COLOR.test(f.properties?.fill || "")) err(w, `area "${f.properties?.name ?? "?"}" needs a "fill" colour like "#d9822b"`);
+          const p = f.properties || {}, name = `feature "${p.name ?? "?"}"`;
+          if (/Polygon$/.test(f.geometry?.type || "") && !COLOR.test(p.fill || "")) err(w, `area ${name} needs a "fill" colour like "#d9822b"`);
+          const okS = p.start === undefined || checkDate(w, `${name} start`, p.start, true);
+          const okE = p.end === undefined || checkDate(w, `${name} end`, p.end, true);
+          const s = p.start || l.start, e = p.end || l.end;
+          if (okS && okE && typeof s === "string" && typeof e === "string" && dayOf(s, "start") > dayOf(e, "end")) err(w, `${name} ends before it starts`);
         }
       } catch { err(w, "file is not valid JSON"); }
     }

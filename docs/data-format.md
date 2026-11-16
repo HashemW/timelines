@@ -138,8 +138,12 @@ file in the topic folder, listed in `topic.json` under `layers`:
 
 - The layer is drawn only while the slider is between `start` and `end`. Readers can switch it off.
 - `style`: `reference` (dashed grey frame), `armistice` (solid green), `zone` (dashed green),
-  `plan` (dotted, for proposals that were never in force, like a partition plan). Labels take
-  the style's colour. A label can have its own `start` and `end` inside the layer's range.
+  `plan` (dotted, for proposals that were never in force, like a partition plan), `front` (solid
+  dark line, for front lines that move). Labels take the style's colour. A label can have its own
+  `start` and `end` inside the layer's range.
+- A feature can also have its own `start` and `end` (in its `properties`), so one file can hold
+  several stages of the same map, e.g. who held what at each point in a war. Features without
+  dates are shown for the layer's whole range.
 - Lines (`LineString`, `MultiLineString`) are drawn in the layer's style. Areas (`Polygon`,
   `MultiPolygon`) are shaded with the feature's own `fill` colour and `fill-opacity` (default
   0.2), the same property names GitHub's map preview uses. Areas sit under the water, so the
