@@ -3658,6 +3658,18 @@
             "sources": [
               "s1"
             ]
+          },
+          {
+            "claim": "An Egyptian Defence Ministry communique of 10 June 1948 said 300 Jewish fighters had been killed at Nitzanim.",
+            "sources": [
+              "s3"
+            ]
+          },
+          {
+            "claim": "An Israeli communique reported on 9 June 1948 disputed Egyptian claims to have killed more than 100 Jews, giving '30 casualties' and 100 taken prisoner.",
+            "sources": [
+              "s4"
+            ]
           }
         ]
       },
@@ -3690,6 +3702,50 @@
         "accessed": "2026-11-15",
         "supports": "date 7 June 1948; first major Egyptian victory and one of the few Israeli surrenders; kibbutz founded 1943, inside the partition plan's Arab state and isolated; 141 defenders; Egyptian artillery, air, armour and infantry attack; 105 surrendered at 16:00, 26 wounded; 33 killed; three or four killed after surrender; prisoners taken to Cairo and returned 7 March 1949; Egyptian media claim of 300 killed; Kovner leaflet and Dori inquiry; kibbutz rebuilt further south",
         "via": "Avraham Ayalon, Givati Brigade against the Egyptian Invader (1963); IDF History Branch, History of the War of Independence; Netanel Lorch, The Edge of the Sword (1968); Benny Morris, 1948 (2008); Kenneth Pollack, Arabs at War (2004); Yoav Gelber, Palestine 1948 (2006)"
+      },
+      {
+        "id": "s2",
+        "title": "Ben-Gurion's diary, 8 June 1948 (full entry)",
+        "author": "David Ben-Gurion",
+        "publisher": "Ben-Gurion Archive, Ben-Gurion University of the Negev (English translation of Ben-Gurion's diary; Israeli leadership voice, here relaying Givati Brigade reports)",
+        "url": "https://bengurionarchive.bgu.ac.il/en/node/14856",
+        "kind": "primary",
+        "accessed": "2026-11-15",
+        "supports": "Givati Brigade report of 09:30 on 8 June: Nitzanim had been attacked the day before (7 June) by planes, tanks, infantry and artillery, and Egyptian infantry captured it; 66 locals and about 80 field-corps (HISH) troops had been there; three escapees ('refugees' in the translation) reached Givati's staff; Ben-Gurion's note that Nitzanim 'was apparently captured by the enemy'",
+        "via": "English translation published by the archive; the scanned Hebrew original on the same page was not checked"
+      },
+      {
+        "id": "s3",
+        "title": "Quiet Settles over Palestine at Truce Hour (Associated Press, New York Herald Tribune, 11 June 1948)",
+        "author": "Associated Press",
+        "publisher": "Center for Online Judaic Studies (US Jewish-history education site), reprinting a US wire report from Cairo that relays an Egyptian government communique",
+        "url": "https://cojs.org/quiet_settles_over_palestine_at_truce_hour-_associated_press-_ny_herald_tribune-_june_11-_1948/",
+        "kind": "journalism",
+        "accessed": "2026-11-15",
+        "supports": "an Egyptian Defence Ministry communique issued on 10 June 1948 said 300 Jewish fighters had been killed by Egyptian troops at 'Nitsanim', on the southern coastal plain between Majdal and Isdud",
+        "via": "transcription of the newspaper article; the scan of the printed page was not checked"
+      },
+      {
+        "id": "s4",
+        "title": "Israeli Partols [sic] Enter Jenin; Find City Deserted; Arabs Intensify Bombing on Tel Aviv",
+        "author": "",
+        "publisher": "Jewish Telegraphic Agency (Jewish news agency; daily bulletin of 9 June 1948)",
+        "url": "https://www.jta.org/archive/israeli-partols-enter-jenin-find-city-deserted-arabs-intensify-bombing-on-tel-aviv",
+        "kind": "journalism",
+        "accessed": "2026-11-15",
+        "supports": "the Egyptians besieged and captured 'Nizzanim', between Majdal and Isdud, which fell after an all-day battle; an Israeli communique disputed Egyptian claims to have killed over 100 Jews there, saying there were '30 casualties' and that 100 Jews were taken prisoner",
+        "via": ""
+      },
+      {
+        "id": "s5",
+        "title": "The Battle of Nitzanim (online exhibition)",
+        "author": "",
+        "publisher": "Israel Ministry of Defense, IDF and Defense Establishment Archives (Israeli government voice)",
+        "url": "https://archives.mod.gov.il/sites/English/Exhibitions/Pages/The-Battle-of-Nitzanim.aspx",
+        "kind": "organization",
+        "accessed": "2026-11-15",
+        "supports": "Egyptian attack on 7 June 1948 with tanks and aircraft; when the defenders lost hope of repelling it they decided to surrender; the local commander came out with his hands up carrying a white handkerchief and was shot dead by an Egyptian officer, and the signaller Mira Ben-Ari shot the officer and was killed (the page calls the commander Avraham Katzenstein; Wikipedia calls him Avraham-Elkana Schwarzstein)",
+        "via": ""
       }
     ],
     "status": "draft"
@@ -4286,12 +4342,38 @@
       "precision": "approximate",
       "note": "Coordinates are those Wikipedia gives for the operation, by the New Gate; the attacks were spread along the walls between the New Gate and the Jaffa Gate and on Mount Zion."
     },
-    "summary": "In July 1948 Irgun and Lehi units, by then coordinated by the new Israel Defense Forces but still independent, planned with the IDF's Etzioni Brigade to break into Jerusalem's walled Old City and capture East Jerusalem. Set for the evening of 16 July, a day before the second truce, the attack was repeatedly delayed and began only at 02:30. The Irgun broke through at the New Gate, but the Lehi attack on the wall towards the Jaffa Gate and the Beit Horon Battalion's attack from Mount Zion failed, and at 05:45 commander David Shaltiel ordered a retreat. The Old City stayed in Jordanian hands until the 1967 war.",
+    "summary": "In July 1948 Irgun and Lehi units, by then coordinated by the new Israel Defense Forces but still independent, planned with the IDF's Etzioni Brigade to break into Jerusalem's walled Old City and capture East Jerusalem. Set for the evening of 16 July, hours before a UN-ordered ceasefire in Jerusalem was due at 05:45 the next morning, the assault was repeatedly delayed and began only at 02:30. The Irgun broke through at the New Gate, but the Lehi attack on the wall towards the Jaffa Gate and the Beit Horon Battalion's attack from Mount Zion failed, and at 05:45 commander David Shaltiel ordered a retreat. The Old City stayed in Jordanian hands until the 1967 war.",
     "parties": [
       "Irgun",
       "Lehi",
       "Israel Defense Forces (Etzioni Brigade, Beit Horon Battalion)",
       "Arab forces holding the Old City"
+    ],
+    "disputes": [
+      {
+        "about": "how far the attack got",
+        "accounts": [
+          {
+            "claim": "The Irgun broke through at the New Gate. Yehuda Lapidot, who led its spearhead unit, writes that sappers blew the gate open at about 03:00 but heavy fire kept his men from establishing a bridgehead inside, while the Lehi and Beit Horon charges only scorched the wall; the order to retreat came at 05:45.",
+            "sources": [
+              "s1",
+              "s3"
+            ]
+          },
+          {
+            "claim": "The Etzioni Brigade reported on the morning of 17 July that the mission failed 'because the effort to breach the [Old City] walls did not succeed', and that its forces withdrew to their bases at 05:30.",
+            "sources": [
+              "s5"
+            ]
+          },
+          {
+            "claim": "In a telegram of 17 July, the UN Truce Commission in Jerusalem referred to 'the attack in which they almost succeeded last night'.",
+            "sources": [
+              "s6"
+            ]
+          }
+        ]
+      }
     ],
     "sources": [
       {
@@ -4314,6 +4396,50 @@
         "kind": "journalism",
         "accessed": "2026-11-15",
         "supports": "Haganah, Irgun and Stern Group (Lehi) veterans marked the anniversary of their abortive attempt to capture the Old City in 1948; Menachem Begin said one gate was broken through; Israeli forces drove Jordanian forces out of the Old City in June 1967",
+        "via": ""
+      },
+      {
+        "id": "s3",
+        "title": "Besieged: Jerusalem 1948 – Memories of an Irgun Fighter (2nd edition), chapter 'Operation Kedem', pp. 308–318",
+        "author": "Yehuda Lapidot",
+        "publisher": "Memoir by the commander of the Irgun's spearhead unit at the New Gate (Irgun veteran's voice; foreword by Menachem Begin, 1992); PDF hosted by Daat (Israeli Jewish-studies website)",
+        "url": "https://www.daat.ac.il/EPUB/books/Besieged.pdf",
+        "kind": "primary",
+        "accessed": "2026-11-15",
+        "supports": "Shaltiel briefed senior officers on the operation on 15 July; Ben-Gurion's cable to Shaltiel of 16 July that shooting would stop in Jerusalem at 05:45 the next morning, and Yadin's cable giving Sheikh Jarrah priority over an Old City bridgehead; the plan: the IDF's Beit Horon Battalion (Meir Zorea) from Mount Zion, the Irgun battalion at the New Gate, a Lehi force on the wall between the New Gate and the Jaffa Gate; bombardment set for 20:00 and the breach for 22:00, then postponed to midnight and then indefinitely; ordered forward at 02:30; Irgun sappers blew open the New Gate at about 03:00, the only breach, but heavy fire kept the unit from establishing a bridgehead; the Lehi and Beit Horon cone charges only scorched the wall; order to retreat at 05:45 because the ceasefire had come into effect; the author's view that the operation was designed to stop the Irgun taking the Old City on its own",
+        "via": "David Shaltiel, Jerusalem 1948 (text of the cables); Dov Joseph, Kirya Ne'emana; Dan Shiftan, The Jordanian Option; Ben-Gurion's war diary; IDF Archives file 54,500/48"
+      },
+      {
+        "id": "s4",
+        "title": "Ben-Gurion's diary, 16 July 1948 (full entry)",
+        "author": "David Ben-Gurion",
+        "publisher": "Ben-Gurion Archive, Ben-Gurion University of the Negev (English translation of Ben-Gurion's diary; Israeli leadership voice)",
+        "url": "https://bengurionarchive.bgu.ac.il/en/node/14176",
+        "kind": "primary",
+        "accessed": "2026-11-15",
+        "supports": "a cable from UN Secretary-General Trygve Lie on the Security Council resolution: a ceasefire in Jerusalem 24 hours after the resolution, which Ben-Gurion notes means 05:45 on 17 July, and in the rest of the country 72 hours after it; Ben-Gurion cabled Shaltiel the decision on the truce, and Yadin cabled that if it was not possible both to breach the Old City and to take Sheikh Jarrah by morning, Sheikh Jarrah came first",
+        "via": "English translation published by the archive; the scanned Hebrew original was not checked"
+      },
+      {
+        "id": "s5",
+        "title": "Ben-Gurion's diary, 17 July 1948 (full entry)",
+        "author": "David Ben-Gurion",
+        "publisher": "Ben-Gurion Archive, Ben-Gurion University of the Negev (English translation of Ben-Gurion's diary; here quoting the Etzioni Brigade's report, Israeli military voice)",
+        "url": "https://bengurionarchive.bgu.ac.il/en/node/14080",
+        "kind": "primary",
+        "accessed": "2026-11-15",
+        "supports": "Etzioni Brigade telegram of 06:30 on 17 July: an overnight attempt to take the Old City together with Irgun (Etzel) and Lehi forces; shelling of the city with mortars and guns from 21:30, 500 shells in more than an hour; the mission failed 'because the effort to breach the [Old City] walls did not succeed'; fierce enemy resistance and heavy shelling of the city; its forces withdrew to their bases at 05:30; Ben-Gurion asks why the order to leave the Old City and take Sheikh Jarrah was disregarded",
+        "via": "English translation published by the archive; the scanned Hebrew original was not checked"
+      },
+      {
+        "id": "s6",
+        "title": "Telegrams dated 11, 12, 15, 17 July 1948 to the President of the Security Council from the Chairman of the Security Council Truce Commission on the subject of Jerusalem (S/915)",
+        "author": "Chairman of the Security Council Truce Commission, Jerusalem",
+        "publisher": "United Nations Security Council document, UN Digital Library (scan); the Truce Commission was made up of the US, French and Belgian consuls in Jerusalem (third-party consular voice)",
+        "url": "https://digitallibrary.un.org/record/470044/files/S_915-EN.pdf",
+        "kind": "primary",
+        "accessed": "2026-11-15",
+        "supports": "telegram of 14–15 July: the Commission feared 'a strong Jewish attack against the Old City' before the truce came into force in Jerusalem, believing the Jews wanted to take the rest of the city first as a card for peace talks; telegram of 17 July: 'the attack in which they almost succeeded last night', and the view that if the truce broke down the Jews should be considered the aggressors (wording of the poor English scan checked against the French version of S/915)",
         "via": ""
       }
     ],
