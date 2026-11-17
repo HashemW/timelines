@@ -15,11 +15,17 @@ const warn = (where, msg) => { warnings++; console.log(`warn   ${where}: ${msg}`
 
 const DATE = /^\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?)?$/;
 const ID = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const TYPES = new Set(["battle", "military-operation", "siege", "massacre", "attack", "displacement", "political",
-  "diplomatic", "ceasefire", "other", "birth", "death", "residence", "journey", "work"]);
+const TYPES = new Set(["battle", "military-operation", "siege", "massacre", "war-crime", "expulsion", "displacement",
+  "attack", "political", "diplomatic", "ceasefire", "other", "birth", "death", "residence", "journey", "work"]);
 const KINDS = new Set(["primary", "scholarly", "reference", "organization", "journalism"]);
 const PRECISION = new Set(["exact", "approximate", "region"]);
 const COLOR = /^#[0-9a-f]{6}$/i;
+// "At a glance" (docs/data-format.md#at-a-glance)
+const GLANCE_PARTS = new Set(["by", "against", "winner", "result", "killed", "displaced"]);
+const KILLED_KINDS = new Set(["civilians", "fighters", "unclear"]);
+const WIN_LEVELS = new Set(["tactical", "strategic"]);
+const EXPECTS_GLANCE = new Set(["battle", "siege", "military-operation", "massacre", "war-crime", "expulsion", "displacement", "attack"]);
+const GLANCE_MAX = 140;
 
 function dayOf(iso, edge) {
   const [y, m, d] = iso.split("-").map(Number);
@@ -57,6 +63,35 @@ function checkSources(where, sources) {
   }
   return ids;
 }
+// One fact in an event's `glance`: short text, its sources, and optionally the dispute it belongs to.
+function checkFact(w, label, f, ids, abouts, textKey = "text") {
+  if (!f || typeof f !== "object" || Array.isArray(f)) { err(w, `glance ${label} must be an object`); return; }
+  const text = f[textKey];
+  if (typeof text !== "string" || !text.trim()) err(w, `glance ${label} needs "${textKey}"`);
+  else if (text.length > GLANCE_MAX) warn(w, `glance ${label} is ${text.length} characters; keep it under ${GLANCE_MAX}`);
+  if (f.note !== undefined && (typeof f.note !== "string" || f.note.length > GLANCE_MAX)) warn(w, `glance ${label} note should be short text`);
+  if (!Array.isArray(f.sources) || !f.sources.length) err(w, `glance ${label} needs sources`);
+  for (const id of f.sources || []) if (!ids.has(id)) err(w, `glance ${label} cites unknown source "${id}"`);
+  if (f.dispute !== undefined && !abouts.has(f.dispute)) err(w, `glance ${label} links to unknown dispute "${f.dispute}"`);
+}
+function checkGlance(w, g, ids, abouts) {
+  if (typeof g !== "object" || Array.isArray(g)) { err(w, "glance must be an object"); return; }
+  for (const k of Object.keys(g)) if (!GLANCE_PARTS.has(k)) err(w, `glance has unknown part "${k}"`);
+  for (const k of ["by", "against", "result", "displaced"]) if (g[k] !== undefined) checkFact(w, k, g[k], ids, abouts);
+  for (const k of ["winner", "killed"]) {
+    if (g[k] !== undefined && (!Array.isArray(g[k]) || !g[k].length)) err(w, `glance ${k} must be a list with at least one row`);
+  }
+  for (const [i, r] of (Array.isArray(g.winner) ? g.winner : []).entries()) {
+    checkFact(w, `winner #${i + 1}`, r, ids, abouts);
+    if (r.level !== undefined && !WIN_LEVELS.has(r.level)) err(w, `glance winner #${i + 1} level must be ${[...WIN_LEVELS].join(" or ")}`);
+  }
+  for (const [i, r] of (Array.isArray(g.killed) ? g.killed : []).entries()) {
+    checkFact(w, `killed #${i + 1}`, r, ids, abouts, "n");
+    if (typeof r.who !== "string" || !r.who.trim()) err(w, `glance killed #${i + 1} needs "who"`);
+    if (!KILLED_KINDS.has(r.kind)) err(w, `glance killed #${i + 1} kind must be ${[...KILLED_KINDS].join(", ")}`);
+  }
+}
+
 // Independent = different website/publisher.
 const independentCount = (sources) =>
   new Set((sources || []).map((s) => host(s.url) || (s.publisher || s.author || s.title).toLowerCase())).size;
@@ -150,6 +185,8 @@ for (const t of topics) {
         for (const id of a.sources || []) if (!ids.has(id)) err(w, `dispute cites unknown source "${id}"`);
       }
     }
+    if (ev.glance !== undefined) checkGlance(w, ev.glance, ids, new Set((ev.disputes || []).map((d) => d.about)));
+    else if (EXPECTS_GLANCE.has(ev.type)) warn(w, "no `glance` (the short facts shown above the details)");
     if ((ev.importance === 1 || ev.disputes?.length) && independentCount(ev.sources) < 2) {
       warn(w, "key or contested event with fewer than two independent sources");
     }

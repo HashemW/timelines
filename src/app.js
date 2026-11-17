@@ -1,6 +1,8 @@
 /* Timelines viewer: plain JavaScript, no build step.
  * Loads one topic from data/topics/<id>/ and lets the reader scrub through time. */
 
+import { GROUPS, groupOf, typeLabel, iconHTML, addMapIcons } from "./icons.js";
+
 const DAY_MS = 86400000;
 const LINGER_DAYS = 10;   // an event stays highlighted this many days after it ends
 const THUMB_PX = 16;      // keep in sync with --thumb in style.css
@@ -10,18 +12,21 @@ const MONTHS = ["January", "February", "March", "April", "May", "June", "July",
   "August", "September", "October", "November", "December"];
 const MON = MONTHS.map((m) => m.slice(0, 3));
 
-const CATEGORY_OF = {
-  battle: "military", "military-operation": "military", siege: "military",
-  massacre: "civilian", attack: "civilian", displacement: "civilian",
-  political: "political", diplomatic: "political", ceasefire: "political", other: "political",
-  birth: "life", death: "life", residence: "life", journey: "life", work: "life",
+// Map icon sizes (the icon images are 32 px): by importance, and for events that are over.
+const ICON_SIZE = ["match", ["get", "importance"], 1, 30 / 32, 2, 25 / 32, 21 / 32];
+const ICON_RADIUS = ["match", ["get", "importance"], 1, 15, 2, 12.5, 10.5];
+const PAST_ICON_SIZE = 15 / 32;
+
+// "At a glance" labels. What `by` and `against` mean depends on the kind of event.
+const GLANCE_LABELS = {
+  battle: ["Attacker", "Defender"], siege: ["Attacker", "Defender"],
+  "military-operation": ["Carried out by", "Against"],
+  massacre: ["Carried out by", "Victims"], "war-crime": ["Carried out by", "Victims"],
+  expulsion: ["Carried out by", "Victims"], displacement: ["Carried out by", "Victims"],
+  attack: ["Carried out by", "Targeted"],
+  ceasefire: ["Agreed by", "With"],
 };
-const CATEGORIES = {
-  military:  { label: "Military", color: "#b03a2e" },
-  civilian:  { label: "Massacres, attacks & displacement", color: "#6a3d9a" },
-  political: { label: "Political & diplomatic", color: "#2a6f97" },
-  life:      { label: "Life events", color: "#3c7a4a" },
-};
+const KIND_TAGS = { civilians: "civilians", fighters: "fighters", unclear: "not broken down" };
 const PHASE_COLORS = ["#eadcc2", "#dfe7d5", "#ecd5cf", "#d8e2eb", "#efe3c8", "#e1d9ea", "#d6e6e1"];
 // Border / area layers (topic.json "layers"): a style per kind of line.
 const LAYER_STYLES = {
@@ -77,7 +82,6 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const posCss = (frac) => `calc(${THUMB_PX / 2}px + (100% - ${THUMB_PX}px) * ${frac})`;
 const widthCss = (frac) => `calc((100% - ${THUMB_PX}px) * ${frac})`;
-const colorOf = (ev) => CATEGORIES[ev.category].color;
 function isSafeUrl(u) { try { return ["http:", "https:"].includes(new URL(u).protocol); } catch { return false; } }
 
 async function getJSON(path, optional = false) {
@@ -93,6 +97,7 @@ async function getJSON(path, optional = false) {
 const state = {
   topic: null, events: [], phases: [], places: null, layers: [],
   min: 0, max: 0, day: 0, selected: null, timer: null, speed: 3, earlierOpen: false,
+  only: new Set(),   // kinds of event the reader chose to see (group keys); empty = all
 };
 let map;
 let hoverPopup;
@@ -103,6 +108,12 @@ function statusOf(ev, day) {
   if (day <= ev.e + LINGER_DAYS) return "recent";
   return "past";
 }
+
+/* ---------- filter by kind of event ---------- */
+const inFilter = (ev) => !state.only.size || state.only.has(ev.group.key);
+// The open event stays on the map even if its kind is filtered out.
+const onMap = (ev) => inFilter(ev) || ev.id === state.selected;
+const visibleEvents = () => state.events.filter(inFilter);
 
 /* ---------- map ---------- */
 function baseStyle() {
@@ -164,9 +175,10 @@ function initMap() {
   applyPadding();
   window.addEventListener("resize", applyPadding);
 
-  map.on("load", () => {
+  map.on("load", async () => {
     addBorderLayers();
     addPlaceLayers();
+    try { await addMapIcons(map); } catch (err) { console.error("Could not draw the event icons", err); }
     addEventLayers();
     render();
   });
@@ -285,10 +297,11 @@ function addPlaceLayers() {
 
 function addEventLayers() {
   map.addSource("events", { type: "geojson", data: eventFeatures() });
-  const color = ["match", ["get", "category"],
-    ...Object.entries(CATEGORIES).flatMap(([k, v]) => [k, v.color]), "#555"];
-  const size = ["match", ["get", "importance"], 1, 8, 2, 6.5, 5];
+  const color = ["match", ["get", "group"], ...GROUPS.flatMap((g) => [g.key, g.color]), "#555"];
   const active = ["in", ["get", "status"], ["literal", ["now", "recent"]]];
+  const icon = ["concat", "ev-", ["get", "group"]];
+  // Icons never hide each other or the labels; more important and current events draw on top.
+  const iconLayout = { "icon-image": icon, "icon-allow-overlap": true, "icon-ignore-placement": true, "symbol-sort-key": ["get", "sort"] };
 
   // Region-wide events (precision "region") get a soft area instead of looking like a pinpoint.
   map.addLayer({
@@ -299,43 +312,42 @@ function addEventLayers() {
     },
   });
   map.addLayer({
-    id: "ev-past", type: "circle", source: "events", filter: ["==", ["get", "status"], "past"],
-    paint: { "circle-radius": 3.5, "circle-color": color, "circle-opacity": 0.4, "circle-stroke-color": "#fff", "circle-stroke-width": 0.6, "circle-stroke-opacity": 0.6 },
+    id: "ev-past", type: "symbol", source: "events", filter: ["==", ["get", "status"], "past"],
+    layout: { ...iconLayout, "icon-size": PAST_ICON_SIZE },
+    paint: { "icon-opacity": 0.5 },
   });
   map.addLayer({
     id: "ev-halo", type: "circle", source: "events", filter: active,
-    paint: { "circle-radius": ["+", size, 8], "circle-color": color, "circle-opacity": ["case", ["==", ["get", "status"], "now"], 0.2, 0.08], "circle-blur": 0.4 },
+    paint: { "circle-radius": ["+", ICON_RADIUS, 8], "circle-color": color, "circle-opacity": ["case", ["==", ["get", "status"], "now"], 0.22, 0.08], "circle-blur": 0.4 },
   });
   map.addLayer({
-    id: "ev-active", type: "circle", source: "events", filter: active,
-    paint: {
-      "circle-radius": size, "circle-color": color,
-      "circle-opacity": ["case", ["==", ["get", "status"], "now"], 1, 0.6],
-      "circle-stroke-color": "#fff", "circle-stroke-width": 2,
-    },
+    id: "ev-active", type: "symbol", source: "events", filter: active,
+    layout: { ...iconLayout, "icon-size": ICON_SIZE },
+    paint: { "icon-opacity": ["case", ["==", ["get", "status"], "now"], 1, 0.7] },
   });
   map.addLayer({
     id: "ev-selected", type: "circle", source: "events", filter: ["==", ["get", "id"], ""],
-    paint: { "circle-radius": 14, "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#2b2620", "circle-stroke-width": 2 },
+    paint: { "circle-radius": ["+", ICON_RADIUS, 4], "circle-color": "rgba(0,0,0,0)", "circle-stroke-color": "#2b2620", "circle-stroke-width": 2 },
   });
   map.addLayer({
     id: "ev-label", type: "symbol", source: "events", filter: active,
     layout: {
       "text-field": ["get", "title"], "text-font": ["Noto Sans Bold"], "text-size": 12,
-      "text-anchor": "top", "text-offset": [0, 1.1], "text-max-width": 11, "text-optional": true,
+      "text-anchor": "top", "text-max-width": 11, "text-optional": true,
+      "text-offset": ["match", ["get", "importance"], 1, ["literal", [0, 1.45]], 2, ["literal", [0, 1.25]], ["literal", [0, 1.1]]],
       "symbol-sort-key": ["get", "importance"],
     },
     paint: { "text-color": "#2b2620", "text-halo-color": "rgba(251,248,241,.95)", "text-halo-width": 1.6 },
   });
 
-  hoverPopup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 12 });
+  hoverPopup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 14 });
   for (const layer of ["ev-active", "ev-past"]) {
     map.on("click", layer, (e) => selectEvent(e.features[0].properties.id, { moveMap: false }));
     map.on("mouseenter", layer, (e) => {
       map.getCanvas().style.cursor = "pointer";
       const ev = byId(e.features[0].properties.id);
       hoverPopup.setLngLat([ev.place.lon, ev.place.lat])
-        .setHTML(`<strong>${esc(ev.title)}</strong><span>${esc(fmtRange(ev.start, ev.end))}</span>`)
+        .setHTML(`<strong>${esc(ev.title)}</strong><span>${esc(typeLabel(ev.type))} · ${esc(fmtRange(ev.start, ev.end))}</span>`)
         .addTo(map);
     });
     map.on("mouseleave", layer, () => { map.getCanvas().style.cursor = ""; hoverPopup.remove(); });
@@ -346,13 +358,15 @@ function eventFeatures() {
   return {
     type: "FeatureCollection",
     features: state.events
+      .filter(onMap)
       .map((ev) => ({ ev, status: statusOf(ev, state.day) }))
       .filter(({ status }) => status !== "future")
       .map(({ ev, status }) => ({
         type: "Feature",
         properties: {
-          id: ev.id, title: ev.title, category: ev.category, importance: ev.importance, status,
+          id: ev.id, title: ev.title, group: ev.group.key, importance: ev.importance, status,
           region: ev.place.precision === "region",
+          sort: (status === "now" ? 10 : 0) + (4 - ev.importance),
         },
         geometry: { type: "Point", coordinates: [ev.place.lon, ev.place.lat] },
       })),
@@ -373,8 +387,8 @@ function buildTimebar() {
   ).join("");
 
   $("ticks").innerHTML = state.events.map((ev) =>
-    `<button class="tick" data-id="${esc(ev.id)}" title="${esc(ev.title)} (${esc(fmtRange(ev.start, ev.end))})"
-      style="left:${posCss(frac(ev.s))};height:${[0, 18, 13, 9][ev.importance]}px;background:${colorOf(ev)}"></button>`
+    `<button class="tick" data-id="${esc(ev.id)}" title="${esc(ev.title)} (${esc(typeLabel(ev.type))}, ${esc(fmtRange(ev.start, ev.end))})"
+      style="left:${posCss(frac(ev.s))};height:${[0, 18, 13, 9][ev.importance]}px;background:${ev.group.color}"></button>`
   ).join("");
 
   // Month labels on the axis, thinned out so there are at most ~10.
@@ -412,9 +426,10 @@ function setDay(day) {
 
 function step(dir) {
   stop();
+  const events = visibleEvents();
   const target = dir > 0
-    ? state.events.find((ev) => ev.s > state.day)
-    : [...state.events].reverse().find((ev) => ev.s < state.day);
+    ? events.find((ev) => ev.s > state.day)
+    : [...events].reverse().find((ev) => ev.s < state.day);
   if (target) selectEvent(target.id, { setDay: true });
 }
 
@@ -438,7 +453,8 @@ function stop() {
 }
 
 /* ---------- panel ---------- */
-const byId = (id) => state.events.find((ev) => ev.id === id);
+let eventIndex = new Map();
+const byId = (id) => eventIndex.get(id);
 
 function selectEvent(id, { setDay: jump = false, moveMap = true } = {}) {
   const ev = byId(id);
@@ -467,36 +483,57 @@ function closeDetail() {
 
 function itemHTML(ev, status) {
   return `<button class="item ${status}" data-id="${esc(ev.id)}">
-    <span class="dot" style="background:${colorOf(ev)}"></span>
+    ${iconHTML(ev.group, 20)}
     <span><span class="item-title">${esc(ev.title)}</span>
-    <span class="item-meta">${esc(fmtRange(ev.start, ev.end))} · ${esc(ev.place.name)}</span></span></button>`;
+    <span class="item-meta">${esc(typeLabel(ev.type))} · ${esc(fmtRange(ev.start, ev.end))} · ${esc(ev.place.name)}</span></span></button>`;
+}
+
+// Kinds of event in this topic, as chips: they explain the icons and filter the map, list and time bar.
+function filtersHTML() {
+  const present = GROUPS.filter((g) => state.events.some((ev) => ev.group === g));
+  if (present.length < 2) return "";
+  const filtering = state.only.size > 0;
+  return `<div class="filters" role="group" aria-label="Kinds of event">
+    <div class="filters-head"><h2>Kinds of event</h2>${filtering
+      ? `<button class="show-all">Show all kinds</button>`
+      : `<span class="hint">Tap one to show only that kind</span>`}</div>
+    <div class="kind-chips">${present.map((g) => {
+      const on = state.only.has(g.key);
+      return `<button class="kind-chip${on ? " on" : ""}${filtering && !on ? " off" : ""}" data-group="${g.key}" aria-pressed="${on}"
+        style="--c:${g.color}" title="${esc(g.label)}">${iconHTML(g, 18)}<span>${esc(g.short || g.label)}</span></button>`;
+    }).join("")}</div></div>`;
 }
 
 function renderList() {
   const day = state.day;
   const groups = { now: [], recent: [], past: [] };
-  for (const ev of state.events) {
+  const events = visibleEvents();
+  for (const ev of events) {
     const st = statusOf(ev, day);
     if (groups[st]) groups[st].push(ev);
   }
-  let html = "";
+  let html = filtersHTML();
   if (groups.now.length) html += `<h2>Happening now</h2>${groups.now.map((ev) => itemHTML(ev, "now")).join("")}`;
   if (groups.recent.length) html += `<h2>Just before</h2>${groups.recent.map((ev) => itemHTML(ev, "recent")).join("")}`;
   if (!groups.now.length && !groups.recent.length) {
-    html += `<p class="empty">Nothing recorded around this date.</p>`;
+    html += `<p class="empty">${state.only.size ? "None of the chosen kinds around this date." : "Nothing recorded around this date."}</p>`;
   }
-  const next = state.events.find((ev) => ev.s > day);
-  if (next) html += `<h2>Next</h2><button class="jump" data-id="${esc(next.id)}">${esc(next.title)} · ${esc(fmtRange(next.start, next.end))}</button>`;
+  const next = events.find((ev) => ev.s > day);
+  if (next) html += `<h2>Next</h2><button class="jump" data-id="${esc(next.id)}">${iconHTML(next.group, 18)}<span>${esc(next.title)} · ${esc(fmtRange(next.start, next.end))}</span></button>`;
   if (groups.past.length) {
     html += `<details class="earlier"${state.earlierOpen ? " open" : ""}><summary>Earlier events (${groups.past.length})</summary>
       ${[...groups.past].reverse().map((ev) => itemHTML(ev, "past")).join("")}</details>`;
   }
   html += layersHTML();
-  html += `<div class="legend">${Object.entries(CATEGORIES)
-    .filter(([k]) => state.events.some((ev) => ev.category === k))
-    .map(([, c]) => `<div><span class="dot" style="background:${c.color}"></span>${esc(c.label)}</div>`).join("")}
-    <div>Bigger dots are more important. Faded dots happened earlier.</div></div>`;
+  html += `<p class="legend">Bigger icons are more important. Faded icons happened earlier.</p>`;
   $("panel-body").innerHTML = html;
+}
+
+function toggleKind(key) {
+  if (state.only.has(key)) state.only.delete(key); else state.only.add(key);
+  render();
+  // Re-rendering replaced the chip; keep keyboard focus on it.
+  $("panel-body").querySelector(`.kind-chip[data-group="${key}"]`)?.focus();
 }
 
 function sourceHTML(s, evId) {
@@ -509,25 +546,57 @@ function sourceHTML(s, evId) {
     ${s.via ? `<div class="via">Relies on: ${esc(s.via)}</div>` : ""}</li>`;
 }
 
+/* The "at a glance" box: the results first (who, who won, how many died), details below. */
+function glanceHTML(ev, refs) {
+  const g = ev.glance;
+  if (!g) return "";
+  const disputeNo = new Map((ev.disputes || []).map((d, i) => [d.about, i]));
+  // Every fact carries its sources; a contested one also links to the dispute that explains it.
+  const backing = (f) => `${f.dispute && disputeNo.has(f.dispute)
+    ? `<button class="disputed" data-dispute="${disputeNo.get(f.dispute)}" title="Sources disagree: ${esc(f.dispute)}">disputed</button>` : ""}${refs(f.sources)}`;
+  const note = (f) => (f.note ? `<span class="note">${esc(f.note)}</span>` : "");
+  const [byLabel, againstLabel] = GLANCE_LABELS[ev.type] || ["By", "Target"];
+  const rows = [];
+  const row = (label, html) => rows.push(`<dt>${esc(label)}</dt><dd>${html}</dd>`);
+
+  if (g.by) row(byLabel, `${esc(g.by.text)} ${backing(g.by)}`);
+  if (g.against) row(againstLabel, `${esc(g.against.text)} ${backing(g.against)}`);
+  if (g.winner?.length) {
+    row("Winner", g.winner.map((w) => `<div class="line"><strong>${esc(w.text)}</strong>${
+      w.level ? ` <span class="tag">${esc(w.level)} victory</span>` : ""} ${backing(w)}${note(w)}</div>`).join(""));
+  }
+  if (g.result) row("Result", `${esc(g.result.text)} ${backing(g.result)}`);
+  if (g.killed?.length) {
+    row("Killed", g.killed.map((k) => `<div class="line"><span class="who">${esc(k.who)}</span>${
+      KIND_TAGS[k.kind] ? ` <span class="tag">${KIND_TAGS[k.kind]}</span>` : ""}
+      <span class="n">${esc(k.n)} ${backing(k)}</span>${note(k)}</div>`).join(""));
+  }
+  if (g.displaced) row("Displaced", `${esc(g.displaced.text)} ${backing(g.displaced)}`);
+  if (!rows.length) return "";
+  return `<section class="glance" aria-label="At a glance"><h3>At a glance</h3><dl>${rows.join("")}</dl></section>`;
+}
+
 function renderDetail(ev) {
   const num = new Map(ev.sources.map((s, i) => [s.id, i + 1]));
   const refs = (ids) => (ids || []).map((id) =>
-    `<button class="ref" data-src="${esc(id)}">[${num.get(id) ?? "?"}]</button>`).join("");
-  const cat = CATEGORIES[ev.category];
+    `<button class="ref" data-src="${esc(id)}" title="Source ${num.get(id) ?? "?"}">[${num.get(id) ?? "?"}]</button>`).join("");
   const st = statusOf(ev, state.day);
   const p = ev.place;
   $("panel-body").innerHTML = `
     <button class="back">← All events around ${esc(fmtDay(state.day))}</button>
-    <div class="kind" style="color:${cat.color}">${esc(cat.label)} · ${esc(ev.type.replace(/-/g, " "))}</div>
+    <div class="kind" style="color:${ev.group.color}">${iconHTML(ev.group, 24)}<span>${esc(typeLabel(ev.type))}</span></div>
     <h2 class="ev-title">${esc(ev.title)}</h2>
-    ${ev.altNames?.length ? `<p class="alt">Also called: ${ev.altNames.map((a) => `${esc(a.name)}${a.usage ? ` <span>(${esc(a.usage)})</span>` : ""}`).join("; ")}</p>` : ""}
     <p class="meta"><strong>${esc(fmtRange(ev.start, ev.end))}</strong>
       ${st === "now" ? "" : `<button class="goto" data-day="${ev.s}">go to date</button>`}<br>
-      ${esc(p.name)}${p.precision !== "exact" ? ` (${esc(p.precision)} location)` : ""}${p.note ? `<br>${esc(p.note)}` : ""}</p>
+      ${esc(p.name)}${p.precision !== "exact" ? ` (${esc(p.precision)} location)` : ""}</p>
+    ${glanceHTML(ev, refs)}
+    <h3>What happened</h3>
     <p class="summary">${esc(ev.summary)}</p>
-    ${ev.parties?.length ? `<p class="meta"><strong>Involved:</strong> ${ev.parties.map(esc).join(", ")}</p>` : ""}
-    ${ev.disputes?.length ? `<h3>Where sources disagree</h3>${ev.disputes.map((d) => `
-      <div class="dispute"><div class="about">${esc(d.about)}</div>
+    ${ev.altNames?.length ? `<p class="meta"><strong>Also called:</strong> ${ev.altNames.map((a) => `${esc(a.name)}${a.usage ? ` (${esc(a.usage)})` : ""}`).join("; ")}</p>` : ""}
+    ${p.note ? `<p class="meta"><strong>The place:</strong> ${esc(p.note)}</p>` : ""}
+    ${ev.parties?.length ? `<p class="meta"><strong>Everyone involved:</strong> ${ev.parties.map(esc).join(", ")}</p>` : ""}
+    ${ev.disputes?.length ? `<h3>Where sources disagree</h3>${ev.disputes.map((d, i) => `
+      <div class="dispute" id="dispute-${esc(ev.id)}-${i}"><div class="about">${esc(d.about)}</div>
       <ul>${d.accounts.map((a) => `<li>${esc(a.claim)} ${refs(a.sources)}</li>`).join("")}</ul></div>`).join("")}` : ""}
     <h3>Sources</h3>
     <ol class="sources">${ev.sources.map((s) => sourceHTML(s, ev.id)).join("")}</ol>
@@ -535,17 +604,26 @@ function renderDetail(ev) {
   $("panel-body").scrollTop = 0;
 }
 
+function flash(el) {
+  if (!el) return;
+  el.scrollIntoView({ block: "center", behavior: "smooth" });
+  el.classList.add("flash");
+  setTimeout(() => el.classList.remove("flash"), 1200);
+}
+
 $("panel-body").addEventListener("click", (e) => {
   const item = e.target.closest(".item, .jump");
   if (item) { stop(); selectEvent(item.dataset.id, { setDay: item.classList.contains("jump") }); return; }
   if (e.target.closest(".back")) { closeDetail(); return; }
+  const chip = e.target.closest(".kind-chip");
+  if (chip) { toggleKind(chip.dataset.group); return; }
+  if (e.target.closest(".show-all")) { state.only.clear(); render(); return; }
   const go = e.target.closest(".goto");
   if (go) { stop(); setDay(+go.dataset.day); return; }
   const ref = e.target.closest(".ref");
-  if (ref) {
-    const li = document.getElementById(`src-${state.selected}-${ref.dataset.src}`);
-    if (li) { li.scrollIntoView({ block: "center", behavior: "smooth" }); li.classList.add("flash"); setTimeout(() => li.classList.remove("flash"), 1200); }
-  }
+  if (ref) { flash(document.getElementById(`src-${state.selected}-${ref.dataset.src}`)); return; }
+  const disputed = e.target.closest(".disputed");
+  if (disputed) flash(document.getElementById(`dispute-${state.selected}-${disputed.dataset.dispute}`));
 });
 $("panel-body").addEventListener("toggle", (e) => {
   if (e.target.classList?.contains("earlier")) state.earlierOpen = e.target.open;
@@ -565,8 +643,10 @@ function render() {
   // Phases can share a boundary day (a truce starts the day the fighting phase ends): the newer one wins.
   const phase = state.phases.filter((ph) => day >= ph.s && day <= ph.e).at(-1);
   $("now-phase").innerHTML = phase ? `<span class="phase-dot" style="background:${phase.color}"></span>${esc(phase.title)}` : "&nbsp;";
-  $("prev").disabled = !state.events.some((ev) => ev.s < day);
-  $("next").disabled = !state.events.some((ev) => ev.s > day);
+  const events = visibleEvents();
+  $("prev").disabled = !events.some((ev) => ev.s < day);
+  $("next").disabled = !events.some((ev) => ev.s > day);
+  for (const t of $("ticks").children) t.hidden = !onMap(byId(t.dataset.id));
 
   if (map?.getSource("events")) {
     map.getSource("events").setData(eventFeatures());
@@ -578,7 +658,7 @@ function render() {
   writeHash();
 }
 
-/* ---------- URL (#d=1948-07-12&e=event-id) so any moment can be linked ---------- */
+/* ---------- URL (#d=1948-07-12&e=event-id&only=battle,massacre) so any moment can be linked ---------- */
 let hashTimer;
 function writeHash() {
   clearTimeout(hashTimer);
@@ -586,7 +666,8 @@ function writeHash() {
     const p = new URLSearchParams();
     p.set("d", dayToIso(state.day));
     if (state.selected) p.set("e", state.selected);
-    history.replaceState(null, "", `${location.pathname}${location.search}#${p}`);
+    if (state.only.size) p.set("only", GROUPS.filter((g) => state.only.has(g.key)).map((g) => g.key).join(","));
+    history.replaceState(null, "", `${location.pathname}${location.search}#${p.toString().replaceAll("%2C", ",")}`);
   }, 150);
 }
 function readHash() {
@@ -595,6 +676,8 @@ function readHash() {
   if (d && /^\d{4}-\d{2}-\d{2}$/.test(d)) state.day = Math.min(Math.max(toDay(d), state.min), state.max);
   const e = p.get("e");
   if (e && byId(e)) state.selected = e;
+  const keys = new Set(GROUPS.map((g) => g.key));
+  state.only = new Set((p.get("only") || "").split(",").filter((k) => keys.has(k)));
 }
 
 // Someone edits or pastes a link while the page is open.
@@ -653,9 +736,10 @@ async function main() {
         ...ev,
         s: toDay(ev.start, "start"),
         e: toDay(ev.end || ev.start, "end"),
-        category: CATEGORY_OF[ev.type] || "political",
+        group: groupOf(ev.type),
       }))
       .sort((a, b) => a.s - b.s || a.importance - b.importance);
+    eventIndex = new Map(state.events.map((ev) => [ev.id, ev]));
     state.layers = await Promise.all((topic.layers || []).map(async (l) => {
       const layer = { ...l, on: l.on !== false, s: toDay(l.start, "start"), e: toDay(l.end, "end") };
       // A feature can carry its own "start"/"end" inside the layer's range (e.g. one shape per stage of a war).

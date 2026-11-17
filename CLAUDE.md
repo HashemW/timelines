@@ -10,6 +10,8 @@ most of the research, coding and repo upkeep.
 - Contested facts go in `disputes`, with each claim attributed to its sources. Never quietly pick one.
 - Topics vary: wars, biographies/journeys, etc. Borders are optional per topic; never block on them.
 - Run `node scripts/validate.mjs` before every commit. It must report 0 errors.
+- Event icons and colours show the kind of event, never the side. Massacres, war crimes and expulsions
+  share one red skull and crossbones whoever did them; never count or rank them by side (owner's rule).
 
 ## Repo
 - GitHub: `HashemW/timelines` (`main`, public). Live on GitHub Pages at https://hashemw.github.io/timelines/ (served
@@ -18,7 +20,7 @@ most of the research, coding and repo upkeep.
 - The older `HashemW/TimeLine` repo is an abandoned earlier attempt. Leave it alone.
 
 ## Working locally
-- `python -m http.server 8000`, then http://localhost:8000 (`?topic=<id>` picks a topic, `#d=YYYY-MM-DD&e=<event-id>` deep-links).
+- `python -m http.server 8000`, then http://localhost:8000 (`?topic=<id>` picks a topic, `#d=YYYY-MM-DD&e=<event-id>&only=<kinds>` deep-links).
 - No build step: `index.html` + `src/app.js` + `src/style.css`; MapLibre GL 4.7.1 from unpkg.
 - Base map = OpenFreeMap vector tiles (water/rivers only) + AWS Terrain Tiles hillshade. No modern
   borders/labels on purpose; period labels come from each topic's `places.json`.

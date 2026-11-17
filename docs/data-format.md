@@ -42,6 +42,12 @@ Dates are strings in ISO order, as precise as the evidence allows:
   "place": { "name": "Lydda (Lod)", "lat": 31.951, "lon": 34.888, "precision": "exact" },
   "summary": "Two to four plain sentences a beginner can follow.",
   "parties": ["Israel Defense Forces", "Arab Legion", "local militia"],
+  "glance": {
+    "by": { "text": "Israel Defense Forces", "sources": ["s1"] },
+    "killed": [
+      { "who": "Residents", "kind": "unclear", "n": "<range the accounts span>", "sources": ["s1", "s2"], "dispute": "number killed" }
+    ]
+  },
   "disputes": [
     {
       "about": "number killed",
@@ -73,16 +79,80 @@ Dates are strings in ISO order, as precise as the evidence allows:
 | `id`         | yes | kebab-case, unique within the topic |
 | `title`      | yes | neutral wording |
 | `altNames`   | no  | names used by different sides or languages |
-| `type`       | yes | `battle`, `military-operation`, `siege`, `massacre`, `attack` (bombings, ambushes), `displacement`, `political`, `diplomatic`, `ceasefire`, `other` (topics like biographies may add their own: `birth`, `death`, `residence`, `journey`, `work`…) |
+| `type`       | yes | `battle`, `military-operation`, `siege`, `massacre`, `war-crime`, `expulsion`, `displacement`, `attack` (bombings, ambushes), `political`, `diplomatic`, `ceasefire`, `other` (topics like biographies may add their own: `birth`, `death`, `residence`, `journey`, `work`…). The type picks the icon; see [Icons and colours](#icons-and-colours) |
 | `start`      | yes | see Dates |
 | `end`        | no  | inclusive |
 | `importance` | yes | `1` = a beginner must know it, `2` = important, `3` = detail |
 | `place`      | yes | `precision` is `exact`, `approximate` or `region` (shown as a soft area, not a pin); add `note` if the place was renamed or destroyed |
 | `summary`    | yes | short and plain; no claims that are not backed by `sources` |
 | `parties`    | no  | who was involved |
+| `glance`     | no  | the short "at a glance" facts shown above the details; see [At a glance](#at-a-glance). Expected for fighting, attacks, massacres and expulsions |
 | `disputes`   | no  | where sources disagree, each claim attributed to its sources |
 | `sources`    | yes | at least one; see [sourcing.md](sourcing.md) |
 | `status`     | yes | `draft` until a human has reviewed it, then `reviewed` |
+
+## At a glance
+
+Most readers want the results first: what kind of event it was, who did it, who won, how
+many died. `glance` holds those facts in a fixed shape, and the viewer shows them in a box
+above the summary. Every part is optional, and every part needs `sources` (ids from the
+event's `sources`).
+
+```json
+"glance": {
+  "by":        { "text": "Egyptian Army", "sources": ["s1"] },
+  "against":   { "text": "Kibbutz members with Palmach fighters", "sources": ["s1"] },
+  "winner":    [
+    { "text": "Egyptian Army", "level": "tactical", "sources": ["s1"] },
+    { "text": "Israeli forces", "level": "strategic", "note": "the five-day stand delayed the Egyptian advance north", "sources": ["s1", "s2"] }
+  ],
+  "result":    { "text": "The defenders withdrew after five days and the Egyptians took the empty kibbutz", "sources": ["s1", "s2"] },
+  "killed":    [
+    { "who": "Egyptian soldiers", "kind": "fighters", "n": "<figure from the sources>", "sources": ["s2"], "dispute": "Size of the forces and Egyptian losses" }
+  ],
+  "displaced": { "text": "<how many left or were forced out>", "sources": ["s1"] }
+}
+```
+
+| Part        | Shown as | Notes |
+|-------------|----------|-------|
+| `by`        | Attacker / Carried out by / Agreed by / By | who did it. The label depends on the type |
+| `against`   | Defender / Against / Victims / Targeted / Target | who it was aimed at |
+| `winner`    | Winner | battles, sieges and operations only. One row per claim. `text` is a side, or `No clear winner`. `level` (optional): `tactical` = won the fight at that place, `strategic` = achieved the wider aim. If perspectives differ, give each its own row and say whose view it is in `note` |
+| `result`    | Result | what changed, in one short sentence |
+| `killed`    | Killed | one row per group. `kind` is `civilians`, `fighters` or `unclear` (the sources don't separate them). `n` is text: `"72"`, `"about 100–120"`, `"dozens"` |
+| `displaced` | Displaced | how many people left or were forced out |
+
+- Keep each `text` under about 110 characters. The summary and disputes carry the nuance.
+  Put asides in `note` (shown smaller, underneath), not in brackets inside `text`.
+- Only figures the sources give. If none do, leave the `killed` row out; if a source says a
+  side's losses are unknown, the row can say so (`"n": "not known"`), so that one side's dead
+  aren't shown alone just because the other side's weren't counted.
+- When the sources disagree, set `dispute` to the `about` of one of the event's disputes. The
+  viewer marks the fact as disputed and links to it. Write the text so it shows the
+  disagreement, never just one side's figure: give the range, or the usual estimate and the
+  main alternative ("about 100–120 by most estimates; 254 reported at the time").
+- Use the same names for the sides as `parties`, with no loaded adjectives.
+
+## Icons and colours
+
+The viewer gives each kind of event an icon and a colour, so readers can tell a battle from a
+truce at a glance and filter by kind:
+
+| Icon | Types |
+|------|-------|
+| crossed swords | `battle`, `siege` |
+| arrow | `military-operation` |
+| skull and crossbones (red) | `massacre`, `war-crime`, `expulsion`, `displacement` |
+| burst | `attack` |
+| handshake | `ceasefire` |
+| columned building | `political`, `diplomatic`, `other` |
+
+- Icons and colours show **what kind of event it was, never which side did it**. Massacres,
+  war crimes and expulsions get the same red skull and crossbones, whoever carried them out.
+- The viewer never totals, counts or ranks massacres by side.
+- Event colours avoid the colours a topic's map layers use for sides (in the 1948 topic: teal
+  for Israeli-held areas and orange for Arab-held ones), so an icon is never read as a side.
 
 ## Source `kind`
 

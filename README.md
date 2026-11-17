@@ -47,8 +47,13 @@ scripts/areas-held-1948/    how the "who held what" layer was built (Python)
 
 - Drag the slider, or press ▶ to play through time
 - ‹ › (or Shift + ← →) jump to the previous / next event; ← → move one day
-- Click a dot or a tick on the timeline to read about an event and see its sources
-- The address bar always links to the exact date and event you're looking at
+- Each kind of event has its own icon: crossed swords for battles, an arrow for military operations,
+  a red skull and crossbones for massacres, war crimes and expulsions (the same icon whoever carried
+  them out), a burst for attacks and bombings, a handshake for ceasefires, columns for politics
+- Tap a kind under "Kinds of event" to show only that kind on the map, the list and the timeline
+- Click an icon or a tick on the timeline to open an event: the key facts come first (who did it,
+  who won, how many were killed), then the full story, where sources disagree, and the sources
+- The address bar always links to the exact date, event and filter you're looking at
 
 ## Credits
 
